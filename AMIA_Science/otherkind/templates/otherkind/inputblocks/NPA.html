@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="npa_div" style="display: none;">
+    <div class="row d-flex align-items-end">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Основание проведения работ</label>
+                <input type="text" id="work_reason" name="work_reason" class="form-control" value="{{ obj.work_reason }}">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Вид и наименование работы</label>
+                <input type="text" id="work_kind" name="work_kind" class="form-control" value="{{ obj.work_kind }}">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Соисполнители</label>
+                <input type="text" id="work_subcontractors" name="work_subcontractors" class="form-control" value="{{ obj.work_subcontractors }}">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

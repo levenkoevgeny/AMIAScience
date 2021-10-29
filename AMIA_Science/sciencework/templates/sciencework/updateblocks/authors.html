@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    {% load widget_tweaks %}
+</head>
+<body>
+<div class="card border-dark mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header" id="withselect">Авторский коллектив</div>
+    <div class="card-body" id="cardbodyforlistauthors">
+        <div class="col-sm-6 d-flex flex-row">
+            <div class="d-flex flex-row align-items-center">
+                {% render_field form.workisforeignauthors type="checkbox" %}<label>Сторонние авторы</label>
+            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="d-flex flex-row align-items-center">
+                <label>Количество</label>&nbsp;
+                {% if publication.workisforeignauthors %}
+                    <input type="number" class="form-control" name="scienceworkforeignauthorscount" id="scienceworkforeignauthorscount" style="width: 80px;" min="1" value="{{ foreigncount }}" required>
+                {% else %}
+                    <input type="number" disabled class="form-control" name="scienceworkforeignauthorscount" id="scienceworkforeignauthorscount" style="width: 80px;" min="1">
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-2 d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <label>Автор</label>&emsp;
+                            {% if authorfirst.isauthor %}
+                                <input type="checkbox" name="checkboxextraauthors1" id="checkboxextraauthors1" class="checkboxextraauthors" checked>
+                            {% else %}
+                                <input type="checkbox" name="checkboxextraauthors1" id="checkboxextraauthors1" class="checkboxextraauthors">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control authorinput" name="inputauthors1" id="inputauthors1"  value="{{ authorfirst.author.lastname }} {{ authorfirst.author.firstname|slice:":1" }}.{{ authorfirst.author.patronymic|slice:":1" }}." required>
+                        <input type="hidden" id="authoridhidden1" name="authoridhidden1" class="authoridhidden" value="{{ authorfirst.author.id }}">
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                        <div class="divforajax"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 two">
+                <div class="d-flex align-items-center flex-row justify-content-between">
+                    <input type="text" disabled class="form-control disabledextrainput" value="{{ authorfirst.author.subdivision }}" style="width: 90%;">
+                    <button type="button" id="scienceworkaddauthor" class="btn btn-outline-primary inputbutton">+</button>
+                </div>
+            </div>
+        </div>
+        <div id="extraauthors">
+            {% if authorsrest %}
+                {% for author in authorsrest %}
+                    <div id="rowextraauthors" class="rowextraauthors"><br>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2 d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <label>Автор</label> 
+                                            {% if author.isauthor %}
+                                                <input type="checkbox" name="checkboxextraauthors" id="checkboxextraauthors" class="checkboxextraauthors" checked>
+                                            {% else %}
+                                                <input type="checkbox" name="checkboxextraauthors" id="checkboxextraauthors" class="checkboxextraauthors">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                                        <input type="text" class="form-control authorinput" name="inputauthors" id="inputauthors" value="{{ author.author.lastname }} {{ author.author.firstname|slice:":1" }}.{{ author.author.patronymic|slice:":1" }}." required>
+                                        <input type="hidden" id="authoridhidden" name="authoridhidden" class="authoridhidden" value="{{ author.author.id }}">
+                                        <div class="invalid-feedback">
+                                            Заполните поле!
+                                        </div>
+                                        <div class="divforajax"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 two">
+                                <div class="d-flex align-items-center flex-row justify-content-between">
+                                    <input type="text" disabled class="form-control disabledextrainput" value="{{ author.author.subdivision }}" style="width: 90%;">
+                                    <button type="button" id="scienceworkdeleteauthor" value="rowextraauthors" class="btn btn-outline-danger deleteauthorbutton inputbutton">--</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <input type="hidden" name="authorscount" id="authorscount" value="{{ publication.authorsinpublication_set.count }}">
+</div>
+</body>
+</html>

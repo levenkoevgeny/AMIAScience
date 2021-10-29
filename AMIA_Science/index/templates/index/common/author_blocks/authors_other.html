@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title></title>
+</head>
+<body>
+<div id="other_authors_div">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="d-flex flex-row align-items-center justify-content-start">
+                <div><input type="checkbox" name="otherauthorscheckpld" id="otherauthorscheckpld"></div>
+                <label>Сторонние авторы</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+        <div class="card-header">Исполнители из других организаций</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <label>Фамилия</label>
+                    <input type="text" class="form-control authorinputotherlastname" name="inputauthorsotherlastname1" id="inputauthorsotherlastname1" disabled placeholder="Введите фамилию" style="width: 80%;" required pattern="[A-Za-zА-Яа-яЁё\-]{1,}">
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <label>Инициалы</label>
+                    <div class="d-flex flex-row align-items-center justify-content-between">
+                        <input type="text" class="form-control authorinputotherpatronymic" name="inputauthorsotherpatronymic1" id="inputauthorsotherpatronymic1" disabled placeholder="Введите инициалы" style="width: 80%;" required pattern="[A-ZА-ЯЁ\-\.]{1,8}">
+
+                        <button type="button" id="scienceworkaddauthorother" class="btn btn-outline-primary inputbuttonother" disabled>+</button>
+                    </div>
+                </div>
+            </div>
+            <div id="extraauthorsother"></div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'index/js/author_other_with_addbutton.js' %}"></script>
+</body>
+</html>

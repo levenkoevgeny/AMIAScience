@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    {% load reporting_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+
+    <title>Рейтинг сотрудника</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanelreporting.html" %}
+        <div class="col-sm-10">
+            <br><br>
+            <form  action="" method="get">{% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Сотрудник</label>
+                            {% if author %}
+                                <select class="employee_select form-control" name="employee_id" id="employee_id" required>
+                                    <option disabled></option>
+                                    {% for  author_for_select in author_list %}
+                                        {% if author_for_select.id == author.id %}
+                                            <option selected value="{{ author_for_select.id }}">{{ author_for_select.lastname }} {{ author_for_select.firstname|slice:":1" }}.{{ author_for_select.patronymic|slice:":1" }}. {{ author_for_select.subdivision.subdivisionname }}</option>
+                                        {% else %}
+                                            <option value="{{ author_for_select.id }}">{{ author_for_select.lastname }} {{ author_for_select.firstname|slice:":1" }}.{{ author_for_select.patronymic|slice:":1" }}. {{ author_for_select.subdivision.subdivisionname }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <select class="employee_select form-control" name="employee_id" id="employee_id" required>
+                                    <option selected disabled></option>
+                                    {% for author in author_list %}
+                                        <option value="{{ author.id }}">{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}. {{ author.subdivision.subdivisionname }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Расчитать рейтинг</button>
+            </form>
+            <br>
+        {% if rating %}
+            <h1>Рейтинг - {{ rating }} баллов</h1>
+        {% endif %}
+
+        {% for item in сouncil_list %}
+
+            {{ item }}<br>
+
+        {% endfor %}
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script src="{% static 'reporting/js/reportingmain.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

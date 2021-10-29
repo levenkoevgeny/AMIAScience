@@ -1,0 +1,75 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>Диссертационные исследования</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'dissertation:input_form' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить диссертационное исследование</a>
+{% endblock %}
+
+{% block filters %}
+    {% include "dissertationresearch/filters_new.html" %}
+{% endblock %}
+
+{% block list %}
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th scope="col" class="sorting" id='id'>Id</th>
+            <th scope="col" class="sorting" id='kind'>Вид</th>
+            <th scope="col" class="sorting" id='dissertationtheme'>Тема</th>
+            <th scope="col">Основание проведения</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Научный руководитель</th>
+            <th scope="col">Место проведения исследования</th>
+            <th scope="col">Подразделение</th>
+            <th scope="col">Дата начала</th>
+            <th scope="col">Дата окончания</th>
+            <th scope="col">Результат</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for dissertation in list %}
+            <tr>
+                <td scope="row">{{ dissertation.id }}</td>
+                <td>{{ dissertation.kind }}</td>
+                <td>{{ dissertation.dissertationtheme }}</td>
+                <td>{{ dissertation.reason }}</td>
+                <td>
+                    {% if dissertation.author  %}
+                        <nobr>{{ dissertation.author.lastname }} {{ dissertation.author.firstname|slice:":1" }}.{{ dissertation.author.patronymic|slice:":1" }}.</nobr>
+                    {% else %}
+                        <nobr>{{ dissertation.otherauthor.lastname }} {{dissertation.otherauthor.initials }}</nobr>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if dissertation.leadersemployees %}
+                        {{ dissertation.leadersemployees.lastname}} {{ dissertation.leadersemployees.firstname|slice:":1" }} {{ dissertation.leadersemployees.patronymic|slice:":1" }}
+                    {% elif dissertation.leadersnotemployees%}
+                        {{ dissertation.leadersnotemployees.lastname }} {{ dissertation.leadersnotemployees.initials }}
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </td>
+
+                <td>{{ dissertation.researchplace }}</td>
+                <td>{{ dissertation.researchplacesubdivision|default_if_none:'Нет данных' }}</td>
+
+                <td>{{ dissertation.datebegin }}</td>
+                <td>{{ dissertation.dateend }}</td>
+
+                <td>{{ dissertation.result }}</td>
+
+                <td><a href="{% url 'dissertation:update_form' dissertation.id %}" class="btn btn-light"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{% url 'dissertation:dissertationdelete' dissertation.id %}" class="btn btn-light"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

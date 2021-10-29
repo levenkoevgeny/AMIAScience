@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form class="form-inline my-2 my-lg-0" action="{% url 'index:search' %}" method="post">{% csrf_token %}
+    <input class="form-control mr-sm-2" name="findfield" id="findfield" placeholder="Строка поиска" style="width: 30vw;">
+    <button class="btn btn btn-outline-dark" type="submit">Поиск</button>
+    <input type="text" hidden name="classname" id="classname" value="{{ classname }}">
+    <input type="text" hidden name="pagename" id="pagename" value="{{ pagename }}">
+</form>
+</body>
+</html>

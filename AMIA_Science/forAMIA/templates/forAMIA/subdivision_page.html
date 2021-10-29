@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+
+{% block css %}{% endblock %}
+{% block title %}
+    <title>{{ subdivision.subdivisionname }}</title>
+{% endblock %}
+
+{% block nav %}
+    {% include "index/common/navs/navforAMIA.html"%}
+{% endblock %}
+
+{% block side_panel %}{% endblock %}
+{% block content %}
+    <div class="container">
+        <br> <br>
+        <div class="row">
+            <div class="col-12">
+                <div class="media">
+                    <a href="{{ subdivision.img_path }}"><img src="{{ subdivision.img_path }}" class="mr-3" alt="Фото кафедры" style="width: 350px;"></a>
+                    <div class="media-body">
+                        <h5 class="mt-0">Информация о кафедре</h5>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item">Категории</li>
+                    <li class="list-group-item"><a href="{% url 'forAMIA:subdivision_kind_list' subdivision.id 1 %}">Публикации</a></li>
+                    <li class="list-group-item"><a href="{% url 'forAMIA:subdivision_kind_list' subdivision.id 2 %}">Научно-исследовательские работы</a></li>
+                    <li class="list-group-item"><a href="{% url 'forAMIA:subdivision_kind_list' subdivision.id 3 %}">Патентно-лицензионная деятельность</a></li>
+                    <li class="list-group-item"><a href="{% url 'forAMIA:subdivision_kind_list' subdivision.id 4 %}">Диссертационные исследования</a></li>
+                </ul>
+            </div>
+            <br>
+            <div class="col-md-6">
+                <ul class="list-group">
+                    <li class="list-group-item">Сотрудники кафедры</li>
+                    {% for author in subdivision.author_set.all %}
+                        <li class="list-group-item"><a href="{% url 'forAMIA:subdivision_author_list' subdivision.id author.id %}">{{ author.get_short_name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}{% endblock %}
+
+
+

@@ -1,0 +1,104 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>Иные виды деятельности</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'other:input' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить в Иные виды деятельности</a>
+{% endblock %}
+
+{% block filters %}
+    {% include "otherkind/filters_new.html" %}
+{% endblock %}
+
+{% block list %}
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th scope="col" class="sorting" id="id">Id</th>
+            <th scope="col">Вид деятельности</th>
+            <th scope="col">Год</th>
+            <nobr><th scope="col">Название совета (издания и т.д.)</th></nobr>
+            <th scope="col">Основание проведения работ</th>
+            <th scope="col">Учреждение (учредитель)</th>
+            <th scope="col">Авторы</th>
+            <th scope="col">Соискатель ученой степени</th>
+            <th scope="col">Тема исследования</th>
+            <th scope="col">Работа выполненная в составе</th>
+            <th scope="col">Результат участия</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for other in list %}
+            <tr>
+                <th scope="row">{{ other.id }}</th>
+                <td>{{ other.activity }}</td>
+                <td>{{ other.other_year }}</td>
+                <td>
+                    {% if other.сouncil %}
+                        {{ other.сouncil }}
+                    {% elif other.dissertation_kind %}
+                        {{ other.dissertation_kind }}
+                    {% elif other.work_kind %}
+                        {{ other.work_kind }}
+                    {% elif other.edition_name %}
+                        {{ other.edition_name }}
+                    {% elif other.study_name %}
+                        {{ other.study_name }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if other.work_reason %}
+                        {{ other.work_reason }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if other.institution %}
+                        {{ other.institution }}
+                    {% elif other.defense_place %}
+                        {{ other.defense_place }}
+                    {% elif other.founder %}
+                        {{ other.founder }}
+                    {% elif other.group_establishment %}
+                        {{ other.group_establishment }}
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </td>
+                <td>
+                    {% for author in other.authors.all %}
+                        <nobr>{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}.</nobr>
+                    {% endfor %}
+                </td>
+                <td>
+                    {{ other.aspirant.lastname|default_if_none:'Нет данных' }} {{other.aspirant.initials }}
+                </td>
+                <td>
+                    {{ other.research_theme|default_if_none:'Нет данных' }}
+                </td>
+                <td>
+                    {% if other.completed_work_council %}
+                        {{ other.completed_work_council }}
+                    {% endif %}
+                    {% if other.completed_work_editoral %}
+                        {{ other.completed_work_editoral }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if other.participation_result %}
+                        {{ other.participation_result }}
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'other:otherchange' other.id %}" class="btn btn-light"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{% url 'other:otherdelete' other.id %}" class="btn btn-light"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <title>Иные виды деятельности</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanel.html"%}
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <br>
+            <div id="maincontent">
+                <form class="needs-validation" action="{% url 'other:addotherkind' %}" method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                <div class="card-header">Данные иных видов научной деятельности</div>
+                                <div class="card-body">
+                                    <div class="row d-flex align-items-end">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label style="line-height: 1">Вид деятельности</label>
+                                                {% if obj %}
+                                                    <select name="activity" id="activity" class="form-control" required>
+                                                        <option disabled></option>
+                                                        {% for activity in activitylist %}
+                                                            {% if obj.activity.id == activity.id %}
+                                                                <option selected value="{{ activity.id }}">{{ activity.activitytitle }}</option>
+                                                            {% else %}
+                                                                <option value="{{ activity.id }}">{{ activity.activitytitle }}</option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                {% else %}
+                                                    <select name="activity" id="activity" class="form-control" required>
+                                                        <option selected disabled></option>
+                                                        {% for activity in activitylist %}
+                                                            <option value="{{ activity.id }}">{{ activity.activitytitle }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                {% endif %}
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Год</label>
+                                                <input class="form-control" type="number" id="other_year" name="other_year" required value="2021">
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            {% include "otherkind/inputblocks/council_data.html"%}
+                                            {% include "otherkind/inputblocks/opposing.html"%}
+                                            {% include "otherkind/inputblocks/NPA.html"%}
+                                            {% include "otherkind/inputblocks/work_group.html" %}
+                                            {% include "otherkind/inputblocks/editorial_board.html" %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% include "index/common/author_blocks/authors_employees.html" %}
+                            <input type="hidden" name="authorscount" id="authorscount" value="1">
+                        </div>
+                    </div>
+                    <button type="submit" name="otherkindsubmit" id="otherkindsubmit" class="btn btn-primary">Добавить!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'otherkind/js/other_main.js' %}"></script>
+<script src="{% static 'index/js/check_form.js' %}"></script>
+
+
+</body>
+</html>

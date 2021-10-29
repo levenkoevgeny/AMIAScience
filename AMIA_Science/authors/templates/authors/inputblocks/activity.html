@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Сведения о научной деятельности</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 border-right">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="d-flex flex-row">
+                            <input type="checkbox" name="employeecandidatecheck" id="employeecandidatecheck"><label>Кандидат наук</label>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col-xl-6">
+                        <label>Присвоено</label>
+                        <input type="date" disabled class="form-control" name="employeecandidatedate" id="employeecandidatedate" required>
+                        <div class="invalid-feedback">
+                            !!!
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div><label>Название кандидатской диссертации</label></div>
+                            <textarea class="form-control" disabled name="employeecandidatetitle" id="employeecandidatetitle" rows="3" style="width: 100%" required></textarea>
+                            <div class="invalid-feedback">
+                                Заполните поле!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div><label>Специальность</label></div>
+                            <select disabled name="employeecandidatespecialty" id="employeecandidatespecialty" class="form-control" style="width: 60%;" required>
+                                <option selected disabled></option>
+                                {% for specialty in candidatespeclist %}
+                                    <option value="{{ specialty.id }}">{{ specialty.candidatespecialtytitle }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">
+                                Заполните поле!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="d-flex flex-row">
+                            <input type="checkbox" name="employeedoctorcheck" id="employeedoctorcheck"><label>Доктор наук</label>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="col-xl-6">
+                        <label>Присвоено</label>
+                        <input type="date" disabled class="form-control" name="employeedoctordate" id="employeedoctordate" required>
+                        <div class="invalid-feedback">
+                            !!!
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div><label>Название докторской диссертации</label></div>
+                            <textarea class="form-control" disabled name="employeedoctortitle" id="employeedoctortitle" rows="3" style="width: 100%" required></textarea>
+                            <div class="invalid-feedback">
+                                Заполните поле!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div><label>Специальность</label></div>
+                            <select disabled name="employeedoctorspecialty" id="employeedoctorspecialty" class="form-control" style="width: 60%;" required>
+                                <option selected disabled></option>
+                                {% for specialty in doctorspeclist %}
+                                    <option value="{{ specialty.id }}">{{ specialty.doctorspecialtytitle }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">
+                                Заполните поле!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

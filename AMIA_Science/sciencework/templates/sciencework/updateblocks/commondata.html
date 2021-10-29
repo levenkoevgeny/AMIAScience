@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+    <p>Общие данные</p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Вид публикации</label>
+                <select class="form-control" name="scienceworkkind" id="scienceworkkind" style="width: 100%;" required>
+                    <option selected disabled></option>
+                    {% for publicationkind in publicationkindlist %}
+                        {% if publication.kind.id == publicationkind.id %}
+                            <option selected value="{{ publicationkind.id }}">{{ publicationkind.publicationkind }}</option>
+                        {% else %}
+                            <option value="{{ publicationkind.id }}">{{ publicationkind.publicationkind }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex align-items-end">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Год издания</label>
+                <input type="number" class="form-control" name="scienceworkyear" id="scienceworkyear" value="{{ publication.year }}" style="width: 80%;" min="1900" max="2019" value="2019" required>
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Полугодие</label>
+                <select class="form-control" name="scienceworkhalfyear" id="scienceworkhalfyear" style="width: 80%;" required>
+                    {% if publication.halfyear == "1" %}
+                        <option selected>1</option>
+                        <option >2</option>
+                    {% else %}
+                        <option>1</option>
+                        <option selected>2</option>
+                    {% endif %}
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Количество печатных листов</label>
+                <input type="number" step="0.01" class="form-control" name="scienceworksheetcount" id="scienceworksheetcount" value="{{ publication.sheetcount }}" style="width: 80%;" min="0" max="1000000" required>
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="form-group">
+                <label>Выходные данные</label>
+				{# <button type="button" id="buttonmakeoutput" class="btn btn-light"><i class="fas fa-check-circle"></i></button>#}
+                <textarea class="form-control" name="scienseworkoutputdata" id="scienseworkoutputdata" rows="4" style="width: 100%" required>{{ publication.outputdata }}</textarea>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

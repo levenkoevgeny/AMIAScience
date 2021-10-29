@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+
+{% block css %}{% endblock %}
+{% block title %}
+    <title>Расширенный поиск</title>
+{% endblock %}
+
+{% block nav %}
+    {% include "index/common/navs/navforAMIA.html"%}
+{% endblock %}
+
+{% block side_panel %}{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <br>
+        <div class="jumbotron">
+            <h1 class="display-4">Страница для расширенного поиска!</h1>
+            <br>
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Фильтры
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Автор</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                           </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Кафедра</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Год</label>
+                            <input type="number" class="form-control" id="exampleInputPassword1">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Поиск!</button>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-4">
+        </div>
+
+    </div>
+{% endblock %}
+
+
+{% block js %}{% endblock %}
+
+
+

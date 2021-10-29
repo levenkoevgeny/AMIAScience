@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title></title>
+</head>
+<body>
+<div id="other_authors_div">
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+            <div class="d-flex flex-row align-items-center justify-content-start">
+                {% if obj.authorsother.count != 0 %}
+                    <div><input type="checkbox" name="otherauthorscheckpld" id="otherauthorscheckpld" checked></div>
+                {% else %}
+                    <div><input type="checkbox" name="otherauthorscheckpld" id="otherauthorscheckpld"></div>
+                {% endif %}
+                <label>Сторонние авторы</label>
+            </div>
+        </div>
+    </div>
+    <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+        <div class="card-header">Исполнители из других организаций</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <label>Фамилия</label>
+                    <input type="text" class="form-control authorinputotherlastname" name="inputauthorsotherlastname1" id="inputauthorsotherlastname1" disabled value="{{ authorotherfirst.lastname }}" style="width: 80%;" required pattern="[A-Za-zА-Яа-яЁё\-]{1,}">
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <label>Инициалы</label>
+                    <div class="d-flex flex-row align-items-center justify-content-between">
+                        <input type="text" class="form-control authorinputotherpatronymic" name="inputauthorsotherpatronymic1" id="inputauthorsotherpatronymic1" disabled value="{{  authorotherfirst.initials }}" style="width: 80%;" required pattern="[A-ZА-ЯЁ\-\.]{1,8}">
+                        <button type="button" id="scienceworkaddauthorother" class="btn btn-outline-primary inputbuttonother" disabled>+</button>
+                    </div>
+                </div>
+            </div>
+            <div id="extraauthorsother">
+                {% for other in authorotherrest %}
+                    <div id="rowextraauthorsother" class="rowextraauthorsother"><br>
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <label>Фамилия</label>
+                                <input type="text" class="form-control authorinputotherlastname" disabled value="{{ other.lastname }}" style="width: 80%;" required pattern="[A-Za-zА-Яа-яЁё\-]{1,}">
+                                <div class="invalid-feedback">
+                                    Заполните поле!
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <label>Инициалы</label>
+                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                    <input type="text" class="form-control authorinputotherpatronymic" disabled value="{{ other.initials }}" style="width: 80%;" required pattern="[A-ZА-ЯЁ\-\.]{1,8}">
+                                    <button type="button" id="scienceworkaddauthorother" class="btn btn-outline-danger deleteauthorbuttonother inputbuttonother" disabled>--</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% if obj.authorsother.count == 0 %}
+            <input type="hidden" name="authorscountother" id="authorscountother" value="1">
+        {% else %}
+            <input type="hidden" name="authorscountother" id="authorscountother" value="{{ obj.authorsother.count }}">
+        {% endif %}
+    </div>
+</div>
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'index/js/author_other_with_addbutton.js' %}"></script>
+</body>
+</html>

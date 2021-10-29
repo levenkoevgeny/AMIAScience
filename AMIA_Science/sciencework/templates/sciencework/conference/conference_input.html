@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load widget_tweaks %}
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+
+    <title>Конференция</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanel.html"%}
+        <div class="col-sm-10">
+            <br>
+            <div id="maincontent">
+                <div id="sciencework">
+                    {% block form_title %}
+                        <form class="needs-validation" action="{% url 'sciencework:conference_add' %}" method="post" novalidate>{% csrf_token %}
+                    {% endblock %}
+                    <div class="card border-dark mb-2" style="max-width: 100%;">
+                        <div class="card-header">Сведения о научной работе</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Название конференции</label>
+                                        {% render_field form.conferencename class+="form-control extra_inputs" rows="4" %}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Статус научного форума</label>
+                                        {% render_field form.forumstatus class+="form-control extra_inputs" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Организатор форума</label>
+                                        {% render_field form.organizatorforum class+="form-control extra_inputs" %}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Страна проведения</label>
+                                        {% render_field form.forumcountry class+="form-control extra_inputs" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Дата проведения форума</label>
+                                        {% render_field form.forumdate class+="form-control extra_inputs" %}
+                                        <div class="invalid-feedback">
+                                            Заполните поле!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Вид научного форума</label>
+                                        {% render_field form.kindforum class+="form-control extra_inputs" %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>Модераторы научного форума/руководители секции</label>
+                                    {% render_field form.moderators class+="form-control extra_inputs" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% block button %}
+                        <button type="submit" name="scienceworksubmit" id="scienceworksubmit" class="btn btn-primary">Добавить конференцию!</button>
+                    {% endblock %}
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#id_moderators').select2();
+    });
+</script>
+<script src="{% static 'index/js/check_form.js' %}"></script>
+</body>
+</html>

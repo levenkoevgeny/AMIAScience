@@ -1,0 +1,78 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title></title>#}
+{#</head>#}
+{#<style>#}
+{#.input-boolean{#}
+{#  margin-top:auto;#}
+{#  margin-bottom:auto; margin-left: 0.5rem;  #}
+{#}#}
+{#</style>#}
+{#<body>#}
+{#<div>#}
+{#    <form id="form-filter">#}
+{#        <div class="row">#}
+{#            <div class="col-lg-12">#}
+{#                <div class="form-group">#}
+{#                    <label>ФИО, звание или должность</label>#}
+{#                    <input type="text" class="form-control" id="searchString" name="searchString" placeholder="Введите ФИО, звание либо должность">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-lg-4">#}
+{#                <div class="form-group">#}
+{#                    <label>Звание</label>#}
+{#                    <select class="form-control" name="employeeRank" id="employeeRank">#}
+{#                        <option value="0" selected>все</option>#}
+{#                        {% for rank in ranklist %}#}
+{#                            <option value="{{rank.id}}">{{rank.rank}}</option>#}
+{#                        {% endfor %}#}
+{##}
+{#                    </select>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-lg-4">#}
+{#                <div class="form-group">#}
+{#                    <label>Должность</label>#}
+{#                    <select class="form-control" name="employeePosition" id="employeePosition">#}
+{#                        <option value="0" selected="">все</option>#}
+{#                        {% for position in positionlist %}#}
+{#                            <option value="{{position.id}}">{{position.positionname}}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </div>#}
+{#            </div>#}
+{#			<div class="col-lg-3 input-boolean">#}
+{#                        <div class="row">#}
+{#                            <input type="checkbox" name="isdocentvak" id="isdocentvak" class="input-boolean">#}
+{#                            <small class="form-text text-muted input-boolean">Является доцентом ВАК</small>#}
+{#                            #}
+{#                        </div>#}
+{#                        <div class="row">#}
+{#                            <input type="checkbox" name="isprofessor" id="isprofessor" class="input-boolean">#}
+{#                            <small class="form-text text-muted input-boolean">Является профессором</small>#}
+{#                            #}
+{#                        </div>#}
+{#						<div class="row">#}
+{#                            <input type="checkbox" name="iscandidate" id="iscandidate" class="input-boolean">#}
+{#                            <small class="form-text text-muted input-boolean">Является кандидатом</small>#}
+{#                            #}
+{#                        </div>#}
+{#						<div class="row">#}
+{#                            <input type="checkbox" name="isdoctor" id="isdoctor" class="input-boolean">#}
+{#                            <small class="form-text text-muted input-boolean">Является доктором наук</small>#}
+{#                            #}
+{#                        </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <button type="submit" class="btn btn-outline-secondary" id='form-filter-submit' style="margin-top: 5px;">Применить фильтр</button>#}
+{#        <a class="btn btn-outline-secondary" style="margin-top: 5px;" href="{% url 'authors:list' %}" >Сбросить фильтр</a>#}
+{#		<a class="btn btn-outline-secondary" id="save-docx" style="margin-top: 5px;" >Сохранить DOCX</a>#}
+{#        <small class="form-text">Найдено записей: {{ count }}</small>#}
+{#    </form>#}
+{#</div>#}
+{#</body>#}
+{#</html>#}

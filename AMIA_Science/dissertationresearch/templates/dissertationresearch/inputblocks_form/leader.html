@@ -1,0 +1,50 @@
+{% load widget_tweaks %}
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Научный руководитель (консультант)
+        {#        {% if obj.leadersnotemployees or obj.leadersemployees %}#}
+        {#            <input type="checkbox" name="thereis" id="thereis_leader" checked>#}
+        {#        {% else %}#}
+        {#            <input type="checkbox" name="thereis" id="thereis_leader">#}
+        {#        {% endif %}#}
+    </div>
+    <div class="card-body" id="thereisleader">
+        <div class="col-sm-6 form-group" id="thereis_div">
+            <label>Не является сотрудником Академии МВД РБ</label>&nbsp;
+            {% if obj.leadersemployees %}
+                <input type="checkbox" name="leaderisemployee" id="leaderisemployee">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% else %}
+                <input type="checkbox" name="leaderisemployee" id="leaderisemployee" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% endif %}
+        </div>
+
+        <div id="div_for_leader_employee" {% if obj.leadersemployees %} style="display: block"{% else %} style="display: none"{% endif %}>
+            <div class="row">
+                <div class="col-sm-6">
+                    {% if obj.leadersemployees %}
+                        {% render_field form.leadersemployees class+="form-control" %}
+                    {% else %}
+                        {% render_field form.leadersemployees|append_attr:"disabled" class+="form-control" %}
+                    {% endif %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="div_for_not_leader_employee" {% if obj.leadersemployees %} style="display: none"{% else %} style="display: block"{% endif %}>
+            <div class="row">
+                <div class="col-sm-6 form-group d-flex flex-row justify-content-center align-items-center">
+                    {% if obj.leadersemployees %}
+                        {% render_field form.leadersnotemployees|append_attr:"disabled" class+="form-control" %}
+                    {% else %}
+                        {% render_field form.leadersnotemployees class+="form-control" %}
+                    {% endif %}
+                    <a onclick="window.open('{% url 'authors:other_leader_input_form' %}','popup','width=500,height=500'); return false;" class="ml-3 btn btn-outline-dark btn-sm"><i class="fas fa-plus"></i></a>
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>Научные работы</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'sciencework:add' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить научную работу</a>
+{% endblock %}
+
+{% block filters %}
+    {% include "sciencework/filters_new.html" %}
+{% endblock %}
+
+{% block list %}
+    <p>Количество листов - <b>{{ sheetcount_sum }}</b></p>
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th scope="col" class="sorting" id='id'>Id</th>
+            <th scope="col" class="sorting" id='kind'>Вид</th>
+            <th scope="col" class="sorting" id='year'>Год</th>
+            <th scope="col">Количество листов</th>
+            <th scope="col">Выходные данные</th>
+            <th scope="col">Авторы</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for sw in list %}
+            <tr>
+                <th scope="row">{{ sw.id }}</th>
+                <td>{{ sw.kind.publicationkind }}</td>
+                <td>{{ sw.year }}</td>
+                <td>
+                    {% if sw.sheetcount %}
+                        {{ sw.sheetcount }}
+                    {% else %}
+                        Нет данных
+                    {% endif %}
+                </td>
+                <td title="{{ sw.outputdata }}">{{ sw.outputdata }}</td>
+                <td>
+                    {% for author in sw.authors.all %}
+                        <nobr>{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}.</nobr>
+                    {% endfor %}
+                </td>
+                <td><a href="{% url 'sciencework:change' sw.id %}" class="btn btn-light"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{% url 'sciencework:scienceworkdelete' sw.id %}" class="btn btn-light"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% load widget_tweaks %}
+
+<div id="other_authors_div">
+    <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+        <div class="card-header">Исполнители из других организаций</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        {% render_field form.authorsother class+="form-control" rows="2" %}
+                    </div>
+                </div>
+            </div>
+            <div id="extraauthorsother"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+{% load widget_tweaks %}
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Автор исследования</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 d-flex flex-row align-items-center form-group">
+                <label>Автор является сотрудником Академии МВД РБ</label>&nbsp;
+                {% if obj.author %}
+                    <input type="checkbox" name="isemployee" id="isemployee" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% else %}
+                    <input type="checkbox" name="isemployee" id="isemployee">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endif %}
+            </div>
+        </div>
+        <div id="div_for_not_employee_author" {% if obj.author %} style="display: none"{% else %} style="display: block"{% endif %}>
+            <div class="row">
+                <div class="col-sm-6 form-group d-flex flex-row justify-content-center align-items-center">
+                    {% if obj.author %}
+                        {% render_field form.otherauthor|append_attr:"disabled" class+="form-control" %}
+                    {% else %}
+                        {% render_field form.otherauthor class+="form-control" %}
+                    {% endif %}
+                    <a onclick="window.open('{% url 'authors:other_author_input_form' %}','popup','width=500,height=270'); return false;" class="ml-3 btn btn-outline-dark btn-sm"><i class="fas fa-plus"></i></a>
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="div_for_employee_author" {% if obj.author %} style="display: block"{% else %} style="display: none"{% endif %}>
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    {% if obj.author %}
+                        {% render_field form.author class+="form-control" %}
+                    {% else %}
+                        {% render_field form.author|append_attr:"disabled" class+="form-control" %}
+                    {% endif %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

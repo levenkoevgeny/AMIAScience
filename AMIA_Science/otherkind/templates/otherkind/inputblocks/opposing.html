@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="opposing_div" style="display: none;">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Вид диссертации</label>
+                {% if obj.dissertation_kind %}
+                    <select name="dissertation_kind" id="dissertation_kind" class="form-control">
+                        <option disabled></option>
+                        {% for kind in dissertationkindlist %}
+                            {% if obj.dissertation_kind.id == kind.id %}
+                                <option selected value="{{ kind.id }}">{{ kind.kind_title }}</option>
+                            {% else %}
+                                <option value="{{ kind.id }}">{{ kind.kind_title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <select name="dissertation_kind" id="dissertation_kind" class="form-control">
+                        <option selected disabled></option>
+                        {% for kind in dissertationkindlist %}
+                            <option value="{{ kind.id }}">{{ kind.kind_title }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Место защиты (куда направлены материалы)</label>
+                {% if obj.defense_place %}
+                    <input type="text" class="form-control" id="defense_place" name="defense_place" value="{{ obj.defense_place }}">
+                {% else %}
+                    <input type="text" class="form-control" id="defense_place" name="defense_place">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>Тема исследования (диссертации)</label>
+                {% if obj.defense_place %}
+                    <input type="text" class="form-control" id="research_theme" name="research_theme" value="{{ obj.research_theme }}">
+                {% else %}
+                    <input type="text" class="form-control" id="research_theme" name="research_theme">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Фамилия соискателя</label>
+                {% if obj.aspirant %}
+                    <input type="text" class="form-control" id="aspirant_lastname" name="aspirant_lastname" value="{{ obj.aspirant.lastname }}">
+                {% else %}
+                    <input type="text" class="form-control" id="aspirant_lastname" name="aspirant_lastname">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Инициалы соискателя</label>
+                <input type="text" class="form-control" id="aspirant_initials" name="aspirant_initials" value="{{ obj.aspirant.initials }}">
+            </div>
+        </div>
+        <div class="col-lg-4" id="defense_date_div">
+            <div class="form-group">
+                <label>Дата защиты</label>
+                <input type="date" class="form-control" id="defense_date" name="defense_date" value="{{ obj.defense_date|date:"Y-m-d" }}">
+            </div>
+        </div>
+    </div>
+    <div class="row" id="make_review_div">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>Учреждение (организация), представившее исследование</label>
+                <input type="text" class="form-control" id="research_institution" name="research_institution" value="{{ obj.research_institution }}">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% load widget_tweaks %}
+
+<div id="adjunct_div">
+    <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+        <div class="card-header">Адъюнкт</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>ФИО</label>
+                        {% render_field form.adjunct class+="form-control" rows="1" %}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+{#                        <label>Подразделение</label>#}
+{#                        {% render_field form.subdivisions class+="form-control" rows="1" %}#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

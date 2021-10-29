@@ -1,0 +1,55 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>Конференции</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'sciencework:conference_add' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить конференцию</a>
+{% endblock %}
+
+{% block filters %}
+        {% include "sciencework/conference/filters.html" %}
+{% endblock %}
+
+{% block list %}
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Название конференции</th>
+            <th scope="col">Статус научного форума</th>
+            <th scope="col">Вид научного форума</th>
+            <th scope="col">Организатор научного форума</th>
+            <th scope="col">Дата проведения</th>
+            <th scope="col">Страна проведения</th>
+            <th scope="col">Модераторы научного форума/руководители секции</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for conference in list %}
+            <tr>
+                <th scope="row">{{ conference.id }}</th>
+                <td>{{ conference.conferencename|default_if_none:'Нет данных' }}</td>
+                <td>{{ conference.forumstatus|default_if_none:'Нет данных' }}</td>
+                <td>{{ conference.kindforum|default_if_none:'Нет данных' }}</td>
+                <td>{{ conference.organizatorforum|default_if_none:'Нет данных' }}</td>
+                <td>{{ conference.forumdate|default_if_none:'Нет данных' }}</td>
+                <td>{{ conference.forumcountry|default_if_none:'Нет данных' }}</td>
+                <td>
+                    {% for moderator in conference.moderators.all %}
+                        <nobr>{{ moderator.lastname }} {{ moderator.firstname|slice:":1" }}.{{ moderator.patronymic|slice:":1" }}.<br></nobr>
+                    {% endfor %}
+                </td>
+                <td><a href="{% url 'sciencework:conference_update' conference.id %}" class="btn btn-light"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{% url 'sciencework:conference_delete' conference.id %}" class="btn btn-light"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

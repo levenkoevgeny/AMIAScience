@@ -1,0 +1,72 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>АНР</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'anr:add' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить апробацию научных результатов</a>
+{% endblock %}
+
+{% block filters %}
+    {% include "anr/filters_new.html" %}
+{% endblock %}
+
+{% block list %}
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th scope="col" class="sorting" id="id">Id</th>
+            <th scope="col">Вид</th>
+            <th scope="col">Название разработки</th>
+            <th scope="col">Вид внедрения</th>
+            <th scope="col">Организация внедрения</th>
+            <th scope="col">Дата внедрения</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Подразделение</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for anr in list %}
+            <tr>
+                <th scope="row">{{ anr.id }}</th>
+                <td>{{ anr.developmentkind.kindtitle }}</td>
+                <td>
+                    {% if anr.sciencework %}
+                        {{ anr.sciencework }}
+                    {% elif anr.nir %}
+                        {{ anr.nir }}
+                    {% elif anr.dissertation %}
+                        {{ anr.dissertation }}
+                    {% else %}
+                        {{ anr.development_without_base }}
+                    {%  endif %}
+
+                </td>
+                <td>{{ anr.introductionkind }}</td>
+                <td>{{ anr.introductionorganization }}</td>
+                <td>{{ anr.approvedate|date:"d.m.Y" }}</td>
+                <td>
+                    {% for author in anr.authors.all %}
+                        <nobr>{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}.</nobr><br>
+                    {% endfor %}
+                </td>
+                <td title="{% for subdivision in  anr.subdivisions.all %}
+{{ subdivision }}
+                            {% endfor %}">
+                    {% for subdivision in anr.subdivisions.all %}
+                        <nobr>{{ subdivision.subdivision_short_name }}</nobr><br>
+                    {% endfor %}
+                </td>
+                <td><a href="{% url 'anr:update' anr.id %}" class="btn btn-light"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{% url 'anr:anrdelete' anr.id %}" class="btn btn-light"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

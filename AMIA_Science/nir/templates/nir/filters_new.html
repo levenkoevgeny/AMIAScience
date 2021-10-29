@@ -1,0 +1,93 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'nir:list' %}" method="get">
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Автор (один либо несколько)</label>
+                {% render_field filter.form.authors class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Подразделение (одно либо несколько)</label>
+                {% render_field filter.form.subdivisions class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Заголовок</label>
+                {% render_field filter.form.nirtitle class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Основание</label>
+                {% render_field filter.form.reason class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Пункт плана НИД Академии МВД</label>
+                {% render_field filter.form.planitem class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Результаты исследования</label>
+                {% render_field filter.form.result class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Научный руководитель</label>
+                {% render_field filter.form.leadersemployees class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Подразделение научного руководителя</label>
+                {% render_field filter.form.leadersemployeessubdivision class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год начала(с)</label>
+                {% render_field filter.form.startdate_since class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год начала(по)</label>
+                {% render_field filter.form.startdate_till class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год окончания(с)</label>
+                {% render_field filter.form.enddate_since class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год окончания(по)</label>
+                {% render_field filter.form.enddate_till class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'nir:list' %}" class="btn btn-outline-dark">Сбросить фильтр</a>
+</form>

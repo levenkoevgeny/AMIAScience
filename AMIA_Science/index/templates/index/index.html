@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <title>Index</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/navforindex.html" %}
+
+<div class="container">
+
+    <br>
+    <div class="jumbotron">
+        <h1 class="display-4">Hello!</h1>
+        <p class="lead">Вас приветствует система учета и обработки данных НИО Академии МВД Республики Беларусь!</p>
+        <hr class="my-4">
+        <p>Для перехода в нужный раздел воспользуйтесь панелью навигации</p>
+        <div class="row mb-3">
+            <div class="col-md-6 d-flex flex-row justify-content-md-end justify-content-center mb-3 mb-md-0">
+                <a href="{% url 'authors:list' %}" class="btn btn-secondary d-flex justify-content-center align-items-center" style="height: 120px; width: 250px; min-width: 250px;"><i class="fas fa-pen fa-lg"></i>&nbsp;Ввод материалов</a>
+            </div>
+            <div class="col-md-6 d-flex flex-row justify-content-md-start justify-content-center">
+                <a href="{% url 'reporting:employee' %}" class="btn btn-secondary d-flex justify-content-center align-items-center" style="height: 120px; width: 250px; min-width: 250px;"><i class="far fa-chart-bar fa-lg"></i>&nbsp;Отчетная документация</a>
+            </div>
+            <div class="col-lg-2 col-xl-3 "></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 d-flex flex-row justify-content-md-end justify-content-center mb-3 mb-md-0">
+                <a href="/admin" class="btn btn-secondary d-flex justify-content-center align-items-center" style="height: 120px; width: 250px; min-width: 250px;"><i class="fas fa-cogs"></i>&nbsp;Администрирование</a>
+            </div>
+            <div class="col-md-6 d-flex flex-row justify-content-md-start justify-content-center mb-3 mb-md-0">
+                <a href="{% url 'index:about' %}" class="btn btn-secondary d-flex justify-content-center align-items-center" style="height: 120px; width: 250px; min-width: 250px;"><i class="far fa-registered"></i>&nbsp;О программе</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'other:list' %}" method="get">
+    <p><b>Общие поля</b></p>
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Вид деятельности</label>
+                {% render_field filter.form.activity class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Автор (один либо несколько)</label>
+                {% render_field filter.form.authors class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Подразделение (одно либо несколько)</label>
+                {% render_field filter.form.subdivisions class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Год (c)</label>
+                {% render_field filter.form.year_gte class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Год (по)</label>
+                {% render_field filter.form.year_lte class+="form-control"  %}
+            </div>
+        </div>
+
+    </div>
+
+    <p><b>Оппонирование диссертационных исследований</b></p>
+
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Вид диссертации</label>
+                {% render_field filter.form.dissertation_kind class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4"></div>
+        <div class="col-xl-4"></div>
+    </div>
+
+    <p><b>Участие в разработке нормативных правовых актов, концепций</b></p>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Основание проведения работ</label>
+                {% render_field filter.form.work_reason class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Вид и наименование работ</label>
+                {% render_field filter.form.work_kind class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <p><b>Участие в составе редакционных коллегий научных изданий РБ и других государств</b></p>
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Наименование научного издания</label>
+                {% render_field filter.form.edition_name class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Учредитель научного издания</label>
+                {% render_field filter.form.founder class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Работа, выполненная в составе редколлегии</label>
+                {% render_field filter.form.completed_work_editoral class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <p><b>Участие в составе рабочих групп</b></p>
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Наименование исследования</label>
+                {% render_field filter.form.study_name class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Учреждение, в котором создана рабочая группа(ВНК)</label>
+                {% render_field filter.form.group_establishment class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Результат исследования</label>
+                {% render_field filter.form.participation_result class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <p><b>Подготовка отзывов</b></p>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Учреждение (организация), представившее исследование</label>
+                {% render_field filter.form.research_institution class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'other:list' %}" class="btn btn-outline-dark">Сбросить фильтр</a>
+</form>

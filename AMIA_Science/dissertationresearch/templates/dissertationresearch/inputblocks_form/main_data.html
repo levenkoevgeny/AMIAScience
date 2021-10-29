@@ -1,0 +1,78 @@
+{% load widget_tweaks %}
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Данные диссертационного исследования</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Вид</label>
+                    {% render_field form.kind|append_attr:"required" class+="form-control" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Основание проведения</label>&nbsp;
+                    {% render_field form.reason|append_attr:"required" class+="form-control" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Результат исследования</label>
+                    {% render_field form.result|append_attr:"required" class+="form-control" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Тема</label>&nbsp;
+                    {% render_field form.dissertationtheme class+="form-control" rows="2" %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Год начала</label>
+                    {% render_field form.datebegin|append_attr:"required" class+="form-control" value="2021" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Год окончания</label>
+                    {% render_field form.dateend|append_attr:"required" class+="form-control" value="2021" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Дата защиты</label>
+                    {% render_field form.dateprotect class+="form-control" %}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Статус исследователя</label>
+                    {% render_field form.status|append_attr:"required" class+="form-control" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

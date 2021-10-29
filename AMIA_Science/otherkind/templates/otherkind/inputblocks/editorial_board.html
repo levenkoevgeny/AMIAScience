@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="editoral_board_div" style="display: none;">
+    <div class="row d-flex align-items-end">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Наименование научного издания</label>
+                {% if obj.edition_name %}
+                    <select name="edition_name" id="edition_name" class="form-control">
+                        <option disabled></option>
+                        {% for edition in edition_name_list %}
+                            {%  if obj.edition_name.id == edition.id %}
+                                <option selected value="{{ edition.id }}">{{ edition.edition_name }}</option>
+                            {% else %}
+                                <option value="{{ edition.id }}">{{ edition.edition_name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <select name="edition_name" id="edition_name" class="form-control">
+                        <option selected disabled></option>
+                        {% for edition in edition_name_list %}
+                            <option value="{{ edition.id }}">{{ edition.edition_name }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Учредитель научного издания</label>
+                {% if obj.founder %}
+                    <select name="founder" id="founder" class="form-control">
+                        <option disabled></option>
+                        {% for orgforum in orgforumlist %}
+                            {% if obj.founder.id == orgforum.id %}
+                                <option selected value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>
+                            {% else %}
+                                <option value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <select name="founder" id="founder" class="form-control">
+                        <option selected disabled></option>
+                        {% for orgforum in orgforumlist %}
+                            <option value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label style="line-height: 1;">Работа, выполненная в составе редколлегии</label>
+                {% if obj.completed_work_editoral %}
+                    <select name="completed_work_editoral" id="completed_work_editoral" class="form-control">
+                        <option disabled></option>
+                        {% for work in worklist %}
+                            {% if obj.completed_work_editoral.id == work.id %}
+                                <option selected value="{{ work.id }}">{{ work.worktitle }}</option>
+                            {% else %}
+                                <option value="{{ work.id }}">{{ work.worktitle }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <select name="completed_work_editoral" id="completed_work_editoral" class="form-control">
+                        <option selected disabled></option>
+                        {% for work in worklist %}
+                            <option value="{{ work.id }}">{{ work.worktitle }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

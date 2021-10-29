@@ -1,0 +1,119 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'authors:list' %}" method="get">
+    <p><b>Личные сведения</b></p>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Фамилия</label>
+                {% render_field filter.form.lastname class+="form-control" %}
+            </div>
+        </div>
+    </div>
+    <p><b>Сведения о прохождении службы</b></p>
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Подразделение (одно либо несколько)</label>
+                {% render_field filter.form.subdivision class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Звание</label>
+                {% render_field filter.form.rank class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Должность</label>
+                {% render_field filter.form.position class+="form-control" %}
+            </div>
+        </div>
+    </div>
+
+    <p><b>Сведения о ученых званиях, научной деятельности</b></p>
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Является доцентом ВАК</label>
+                {% render_field filter.form.isdocentvak class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Является профессором</label>
+                {% render_field filter.form.isprofessor class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Является кандидатом наук</label>
+                {% render_field filter.form.iscandidate class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Является доктором наук</label>
+                {% render_field filter.form.isdoctor class+="form-control" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Доцент (с)</label>
+                {% render_field filter.form.docentvakdate_gte class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Доцент (по)</label>
+                {% render_field filter.form.docentvakdate_lte class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Профессор (с)</label>
+                {% render_field filter.form.professordate_gte class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Профессор (по)</label>
+                {% render_field filter.form.professordate_lte class+="form-control" %}
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Кандидат (с)</label>
+                {% render_field filter.form.candidatedate_gte class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Кандидат (по)</label>
+                {% render_field filter.form.candidatedate_lte class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Доктор (с)</label>
+                {% render_field filter.form.doctordate_gte class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Доктор (по)</label>
+                {% render_field filter.form.doctordate_lte class+="form-control" %}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'authors:list' %}"
+                                                                                    class="btn btn-outline-dark">Сбросить
+    фильтр</a>
+</form>

@@ -1,0 +1,162 @@
+{#<div>#}
+{#    <form id="form-filter">#}
+{##}
+{#        <div class="row">#}
+{#            <div class="col-lg-12">#}
+{#                <div class="form-group">#}
+{#                    <label>Заголовок</label>#}
+{#                    <input type="text" class="form-control" id="nirtitle" name="nirtitle" placeholder="Введите заголовок">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-lg-12">#}
+{#		<div class="form-group">#}
+{#                	<label>Основание</label>#}
+{#                	<select class="form-control" name="reasonnir" id="reasonnir">#}
+{#                    		<option value="0">все</option>#}
+{# 				{% for reasonnir in reasonnirlist %}#}
+{#                            		<option value="{{reasonnir.id}}">{{reasonnir.reasonname}}</option>#}
+{#                        	{% endfor %}#}
+{#                	</select>#}
+{#		</div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-6">#}
+{#		<div class="form-group">#}
+{#                	<label>Результат</label>#}
+{#                	<select class="form-control" name="researchresults" id="researchresults">#}
+{#                    		<option value="0">все</option>#}
+{# 				{% for researchresults in researchresultslist %}#}
+{#                           		 <option value="{{researchresults.id}}">{{researchresults.researchresultname}}</option>#}
+{#                        	{% endfor %}#}
+{#                	</select>#}
+{#		</div>#}
+{#            </div>#}
+{#            <div class="col-6">#}
+{#		<div class="form-group">#}
+{#                	<label>Автор</label>#}
+{#                	<select class="form-control" name="author" id="author">#}
+{#                    		<option value="0">все</option>#}
+{# 				{% for author in authorlist %}#}
+{#                            		<option value="{{author.id}}">{{author}}</option>#}
+{#                        	{% endfor %}#}
+{#                	</select>#}
+{#		</div>#}
+{#            </div>#}
+{# 	</div>#}
+{#        <!--<div class="row">#}
+{#            <div class="col-lg-4">#}
+{#                <div class="form-group">#}
+{#                    <label>Вид</label>#}
+{#                    <select class="form-control" name="kind" id="kind">#}
+{#                        <option value="0" selected>все</option>#}
+{#                        {% for kind in kindlist %}#}
+{#                            <option value="{{kind.id}}">{{kind.publicationkind}}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-lg-4">#}
+{#                <div class="form-group">#}
+{#                    <label>Год</label>#}
+{#                    <select class="form-control" name="year" id="year">#}
+{#                        <option value="0" selected="">все</option>#}
+{#                        {% for year in yearlist %}#}
+{#                            <option value="{{year}}">{{year}}</option>#}
+{#                        {% endfor %}#}
+{#                    </select>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div-->#}
+{#        <button type="submit" class="btn btn-outline-secondary" id='form-filter-submit' style="margin-top: 5px;">Применить фильтр</button>#}
+{#        <a class="btn btn-outline-secondary" style="margin-top: 5px;" href="{% url 'nir:list' %}" >Сбросить фильтр</a>#}
+{#        <a class="btn btn-outline-secondary" id="save-docx" style="margin-top: 5px;" >Сохранить DOCX</a>#}
+{#        <small class="form-text">Найдено записей: {{ count }}</small>#}
+{#    </form>#}
+{#</div>#}
+{#<script>#}
+{#    //choose necessary options in filter#}
+{#    function addToFilter(filterString, variableId, variableTitle, filterStringEnd=""){#}
+{#        if (variableId != "" && variableId != "0" && variableId != "''"){#}
+{#            var firstSymbol = (filterString == "filter={") ? "" : ","#}
+{#            filterString += firstSymbol + variableTitle + variableId + filterStringEnd#}
+{#        }#}
+{#        return filterString#}
+{#    }#}
+{##}
+{#    function filter_string_calculate(){#}
+{#        var nirtitle = $('#nirtitle').val()#}
+{#	var reasonnir = $('#reasonnir').val()#}
+{#        var researchresults = $('#researchresults').val()#}
+{#	var author = $('#author').val()#}
+{#        var filterString="filter={";#}
+{#        filterString = addToFilter(filterString, reasonnir, "'reason__in':[","]")#}
+{#        filterString = addToFilter(filterString, researchresults, "'result':")#}
+{#        filterString = addToFilter(filterString, "'" + nirtitle + "'", "'nirtitle__icontains':")#}
+{#	filterString = addToFilter(filterString, author, "'authors__in':[","]")#}
+{#        filterString = filterString + "}";#}
+{#        return filterString#}
+{#    }#}
+{#   //ON PAGE LOAD FILL IN FILTERS#}
+{#    let searchParams = new URLSearchParams(window.location.search);#}
+{##}
+{#    if (searchParams.has('filter')){#}
+{#        $('#btn-filters').trigger('click');#}
+{#        var filter_json = JSON.parse(searchParams.get('filter').replace(/'/g, '"'));#}
+{#        if (filter_json.result != undefined){#}
+{#            $('#researchresults').val(filter_json.result).change();#}
+{#        }#}
+{#        if (filter_json.reason__in != undefined){#}
+{#            $('#reasonnir').val(filter_json.reason__in[0]).change();#}
+{#        }#}
+{#        if (filter_json.nirtitle__icontains != undefined){#}
+{#            $('#nirtitle').val(filter_json.nirtitle__icontains);#}
+{#        }#}
+{#        if (filter_json.authors__in != undefined){#}
+{#            $('#author').val(filter_json.authors__in[0]);#}
+{#        }#}
+{#    }#}
+{#  $(document).ready(function() {#}
+{#    if (searchParams.has('search')){#}
+{#    	    $('#searchString').val(searchParams.get('search'));#}
+{#    	}#}
+{#    	if (searchParams.has('order')) {#}
+{#    	    $('th#'+ searchParams.get('order')).css("text-decoration","underline").css("font-weight","900");#}
+{#    	}#}
+{#   });#}
+{##}
+{#function generate_get(pathname){#}
+{#           var url_string = "";#}
+{#        //var searchString = $('#searchString').val()#}
+{#        var filter_string = filter_string_calculate()#}
+{#        var order_string="";#}
+{##}
+{#        if (searchParams.has('order')){#}
+{#            order_string = "order=" + searchParams.get('order');#}
+{#            url_string = "?" + order_string;#}
+{#        }#}
+{#        if (filter_string != "filter={}"){#}
+{#            url_string += ((url_string == "") ? "?" : "&") + filter_string;#}
+{#        }#}
+{#        /*if (searchString != ""){#}
+{#            url_string += ((url_string == "") ? "?" : "&") + "search=" + searchString#}
+{#        }*/#}
+{#        /*if (url_string == ""){#}
+{#            url_string = location.protocol + '//' + location.host + location.pathname#}
+{#        }*/#}
+{##}
+{#        return location.protocol + '//' + location.host + pathname + url_string#}
+{#}#}
+{##}
+{##}
+{#    //SUBMIT FORM#}
+{#    $("#form-filter-submit").on("click", function(e){#}
+{#        e.preventDefault();#}
+{#        location.href = generate_get(location.pathname);#}
+{#    });#}
+{#    $("#save-docx").on("click", function(e){#}
+{#    location.href = generate_get("{% url 'reporting:nir-export' %}");#}
+{#    });#}
+{#</script>#}

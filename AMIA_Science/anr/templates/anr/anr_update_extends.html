@@ -1,0 +1,9 @@
+{% extends "anr/anr_input_extends.html" %}
+
+{% block form_title %}
+    <form class="needs-validation" action="{% url 'anr:update' anr_id=obj.id %}"  method="post" novalidate>
+{% endblock %}
+
+{% block button %}
+    <button type="submit" name="anrksubmit" id="anrksubmit" class="btn btn-primary">Сохранить!</button>
+{% endblock %}

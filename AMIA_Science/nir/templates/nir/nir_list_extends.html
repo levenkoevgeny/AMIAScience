@@ -1,0 +1,105 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>НИР</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'nir:input' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить НИР</a>
+{% endblock %}
+
+{% block filters %}
+    {% include "nir/filters_new.html" %}
+{% endblock %}
+
+{% block list %}
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th scope="col" class="sorting" id='id'>Id</th>
+            <th scope="col" class="sorting" id='nirtitle'>Заголовок</th>
+            <th scope="col">Основание</th>
+            <th scope="col">Пункт плана</th>
+            <th scope="col">Дата начала</th>
+            <th scope="col">Дата окончания</th>
+            <th scope="col">Подразделение</th>
+            <th scope="col">Научный руководитель</th>
+            <th scope="col">Исполнители</th>
+            <th scope="col">Результат исследования
+            <th scope="col">Дата утверждения</th>
+
+
+
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for nir in list %}
+            <tr>
+                <th scope="row">{{ nir.id }}</th>
+                <td title="{{ nir.nirtitle }}">{{ nir.nirtitle }}</td>
+                <td>
+                    {% for reason in  nir.reasoninnir_set.all %}
+                        {{ reason.reason }}<br>
+                    {% endfor %}
+                </td>
+                <td>{{ nir.planitem }}</td>
+                <td>
+                    {{ nir.startdate|date:"d.m.Y" }}
+                </td>
+                <td>
+                    {{ nir.enddate|date:"d.m.Y" }}
+                </td>
+                <td title="{% for subdivision in  nir.subdivisions.all %}
+                                {{ subdivision }}
+                            {% endfor %}">
+                    {% for subdivision in  nir.subdivisions.all %}
+                        <nobr>{{ subdivision.subdivision_short_name }}</nobr><br>
+                    {% endfor %}
+                </td>
+
+                <td>
+                    {% if nir.leadersemployees %}
+                        <nobr>{{ nir.leadersemployees.lastname }} {{ nir.leadersemployees.firstname|slice:":1" }}.{{ nir.leadersemployees.patronymic|slice:":1" }}.</nobr>
+                    {% elif nir.leadersnotemployees%}
+                        <nobr>{{ nir.leadersnotemployees.lastname }} {{ nir.leadersnotemployees.initials }}</nobr>
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </td>
+                <td>
+                    {% for author in  nir.authors.all %}
+                        <nobr>{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}.</nobr><br>
+
+                    {% endfor %}
+
+
+
+                </td>
+                <td>
+                    {% if nir.result %}
+                        {{ nir.result }}
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </td>
+                <td>
+                    {% if nir.approvedate %}
+                        {{ nir.approvedate|date:"d.m.Y" }}
+                    {% else %}
+                        Нет
+                    {% endif %}
+                </td>
+
+
+                <td><a href="{% url 'nir:nirchange' nir.id %}" class="btn btn-light"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{% url 'nir:nirdelete' nir.id %}" class="btn btn-light"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

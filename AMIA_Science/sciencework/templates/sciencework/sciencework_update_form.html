@@ -1,0 +1,12 @@
+{% extends "sciencework/scienceork_input_form.html" %}
+{% block form_title %}
+    <form class="needs-validation" action="{% url 'sciencework:change' publication_id=publication.id %}" method="post" novalidate>{% csrf_token %}
+{% endblock %}
+
+{% block authors %}
+    {% include './updateblocks/authors.html' %}
+{% endblock %}
+
+{% block button %}
+    <button type="submit" name="scienceworksubmit" id="scienceworksubmit" class="btn btn-primary">Сохранить публикацию!</button>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% load widget_tweaks %}
+
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Данные апробации</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="form-group">
+                    <label>Вид внедренной разработки</label>
+                    {% render_field form.developmentkind class+="form-control" required=true %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="form-group">
+                    {% render_field form.development_has_not_base %}
+                    <label>Работы нет в базе</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div id="has_not_work" style="display: none;">
+                    <div class="form-group">
+                        <label>Название разработки (без проводки)</label>
+                        {% render_field form.development_without_base class+="form-control" rows="2" %}
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                    </div>
+                </div>
+                <div id="has_work">
+                    <div id="publication_div">
+                        <div class="form-group">
+                        {% if error_message %}
+                            <p><b>{{ error_message }}</b></p>
+                        {% endif %}
+                            {% if obj.sciencework %}
+                                <input type="text" class="form-control" name="publinput" id="publinput" value="{{ obj.sciencework }}" required>
+                                <input type="hidden" id="workinputhidden" name="workinputhidden" value="{{ obj.id }}">
+                            {% else %}
+                                <input type="text" class="form-control" name="publinput" id="publinput" placeholder="Начните вводить название..." required>
+                                <input type="hidden" id="workinputhidden" name="workinputhidden">
+                            {% endif %}
+                            <div id="authorsajax" class="div_anr_sciencework" style="width: 800px;"></div>
+                            <div class="invalid-feedback">
+                                Заполните поле!
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dissertations_div">
+                        <div class="form-group">
+                            {% render_field form.dissertation class+="form-control" required=true %}
+                            <div class="invalid-feedback">
+                                Заполните поле!
+                            </div>
+                        </div>
+                    </div>
+                    <div id="nir_div">
+                        <div class="form-group">
+                            {% render_field form.nir class+="form-control" required=true %}
+                            <div class="invalid-feedback">
+                                Заполните поле!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex align-items-end">
+            <div class="col-xl-4">
+                <div class="form-group">
+                    <label style="line-height: 1">Дата утверждения акта</label>
+                    {% render_field form.approvedate class+="form-control" required=true %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-4">
+                <div class="form-group">
+                    <label style="line-height: 1">Полугодие</label>
+                    {% render_field form.halfyear class+="form-control" required=true %}
+                </div>
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="form-group">
+                    <label>Год</label>
+                    {% render_field form.year class+="form-control" required=true value="2021" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <label>Вид внедрения</label>
+                {% render_field form.introductionkind class+="form-control" required=true %}
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="form-group">
+                    <label>Организация внедрения</label>
+                    {% render_field form.introductionorganization class+="form-control" required=true %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

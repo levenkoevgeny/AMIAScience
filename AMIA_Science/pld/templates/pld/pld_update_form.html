@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+
+    <title>Редактирование данных</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanel.html"%}
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <br>
+            <div id="maincontent">
+                <form class="needs-validation" action="{% url 'pld:makeupdatepld' %}" method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                <div class="card-header">Данные патентно-лицензионной деятельности</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Вид</label>
+                                                <select name="pldkind" id="pldkind" class="form-control" required>
+                                                    <option disabled></option>
+                                                    {% for pldkind in pldkindlist %}
+                                                        {% if obj.kind.id == pldkind.id %}
+                                                            <option selected value="{{ pldkind.id }}">{{ pldkind.kindtitle }}</option>
+                                                        {% else %}
+                                                            <option value="{{ pldkind.id }}">{{ pldkind.kindtitle }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Патентообладатель</label>
+                                                <select name="pldowner" id="pldowner" class="form-control" multiple size="3" required>
+                                                    {% for owner in polist %}
+                                                        {% if owner.id in poinpldlist %}
+                                                            <option selected value="{{ owner.id }}">{{ owner.ownername }}</option>
+                                                        {% else %}
+                                                            <option value="{{ owner.id }}">{{ owner.ownername }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Начало действия</label>
+                                                <input type="date" class="form-control" name="pldstartdate" id="pldstartdate" value="{{ obj.actionstart|date:"Y-m-d" }}">
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Дата подачи заявки</label>
+                                                <input type="date" class="form-control" name="pldrequestdate" id="pldrequestdate" value="{{ obj.requestdate|date:"Y-m-d" }}" required>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Дата регистрации</label>
+                                                <input type="date" class="form-control" name="pldregistrationdate" id="pldregistrationdate" style="width: 80%;" value="{{ obj.registrationdate|date:"Y-m-d" }}">
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Номер патента</label>
+                                                <input type="text" class="form-control" id="patentnumber" name="patentnumber" value="{{ obj.panentnumber }}">
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Название разработки</label>
+                                                <textarea class="form-control" name="pldname" id="pldname" rows="2" required>{{ obj.pldtitle }}</textarea>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "index/common/author_blocks/authors_employees_update.html" %}
+                            {% include "index/common/author_blocks/authors_other_update.html" %}
+                        </div>
+                        <input type="hidden" name="pldid" id="pldid" value="{{ obj.id }}">
+                    </div>
+                    <button type="submit" name="pldsubmit" id="pldsubmit" class="btn btn-primary">Сохранить изменения!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<script src="{% static 'index/js/check_form.js' %}"></script>
+<script src="{% static 'pld/js/update_pld_main.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#pldowner').select2();
+    });
+</script>
+</body>
+</html>

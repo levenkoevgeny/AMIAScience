@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 border-left" id="extradataforsciencework">
+    <p>Дополнительные данные</p>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="subspecies" style="display:none;">
+            <label>Вид издания</label>
+            <select class="form-control" name="scienceworksubspecies" id="scienceworksubspecies" disabled>
+                <option selected disabled></option>
+                {% for subspecies in subspecieslist %}
+                    {% if publication.subspecies.id == subspecies.id %}
+                        <option selected value="{{ subspecies.id }}">{{ subspecies.title }}</option>
+                    {% else %}
+                        <option value="{{ subspecies.id }}">{{ subspecies.title }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="publ" style="display:none;">
+            <div class="form-group">
+                <label>Издательство</label>
+                <select class="form-control" name="scienceworkpublisher" id="scienceworkpublisher" style="width: 80%;" disabled>
+                    <option selected disabled></option>
+                    {% for publisher in publisherlist %}
+                        {% if publication.publisher.id == publisher.id %}
+                            <option selected value="{{ publisher.id }}">{{ publisher.publishername }}</option>
+                        {% else %}
+                            <option value="{{ publisher.id }}">{{ publisher.publishername }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="grif" style="display:none;">
+            <div class="form-group">
+                <label>Гриф</label>
+                <select class="form-control" name="scienceworkgrif" id="scienceworkgrif" style="width: 80%;"disabled>
+                    <option selected disabled></option>
+                    {% for grif in griflist %}
+                        {% if publication.grif.id == grif.id %}
+                            <option selected value="{{ grif.id }}">{{ grif.grifname }}</option>
+                        {% else %}
+                            <option value="{{ grif.id }}">{{ grif.grifname }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="checkmagaz" style="display:none;">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="row" id="radiocheck">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    {% if publication.magazine %}
+                        <p><input name="magazinekindradio" id="magazinekindradio" type="radio" value="1" checked>Журнал</p>
+                    {% else %}
+                        <p><input name="magazinekindradio" id="magazinekindradio" type="radio" value="1">Журнал</p>
+                    {% endif %}
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    {% if publication.digest %}
+                        <p><input name="magazinekindradio" id="digestkindradio" type="radio" value="2" checked>Сборник статей(трудов)</p>
+                    {% else %}
+                        <p><input name="magazinekindradio" id="digestkindradio" type="radio" value="2">Сборник статей(трудов)</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="magaz">
+                    <div class="form-group">
+                        <label>Название журнала</label>
+                        <select class="form-control" name="scienceworkmagazinetitle" id="scienceworkmagazinetitle" style="width: 80%;">
+                            <option selected disabled></option>
+                            {% for magazine in magazinelist %}
+                                {% if publication.magazine.id == magazine.id %}
+                                    <option selected value="{{ magazine.id }}">{{ magazine.magazinename }}</option>
+                                {% else %}
+                                    <option value="{{ magazine.id }}">{{ magazine.magazinename }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="digest">
+                    <div class="form-group">
+                        <label>Название сборника статей(трудов)</label>
+                        <select disabled class="form-control" name="scienceworkdigesttitle" id="scienceworkdigesttitle" style="width: 80%;">
+                            <option selected disabled></option>
+                            {% for digest in digestlist %}
+                                {% if publication.digest.id == digest.id %}
+                                    <option selected value="{{ digest.id }}">{{ digest.digestname }}</option>
+                                {% else %}
+                                    <option value="{{ digest.id }}">{{ digest.digestname }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="orgfounder" style="display:none;">
+            <label>Организация учредитель сборника научных статей</label>
+            <select class="form-control" name="scienceworkorgfounder" id="scienceworkorgfounder" style="width: 80%;" disabled>
+                <option selected disabled></option>
+                {% for orgfounder in orgfounderlist %}
+                    {% if publication.orgfounders.id == orgfounder.id %}
+                        <option selected value="{{ orgfounder.id }}">{{ orgfounder.orgname }}</option>
+                    {% else %}
+                        <option value="{{ orgfounder.id }}">{{ orgfounder.orgname }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="interbase" style="display:none;">
+            <div class="form-group">
+                <label>Международная база научного цитирования</label>
+                {% if publication.ininternational %}
+                    <input type="checkbox" name="scienceworkcitationcheck" id="scienceworkcitationcheck" checked>
+                {% else %}
+                    <input type="checkbox" name="scienceworkcitationcheck" id="scienceworkcitationcheck">
+                {% endif %}
+                <select class="form-control" name="scienceworkcitation" id="scienceworkcitation" style="width: 80%;" disabled>
+                    <option selected disabled></option>
+                    {% for base in internationalbaselist %}
+                        {% if publication.ininternational.id == base.id %}
+                            <option selected value="{{ base.id }}">{{ base.basename }}</option>
+                        {% else %}
+                            <option value="{{ base.id }}">{{ base.basename }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="interest" style="display:none;">
+            <div class="form-group">
+                <label>В чьих интересах</label>
+                <select class="form-control" name="scienceworkinterest" id="scienceworkinterest" style="width: 80%;" disabled>
+                    <option selected disabled></option>
+                    {% for interes in interestlist %}
+                        {% if publication.interest.id == interes.id %}
+                            <option selected value="{{ interes.id }}">{{ interes.interestname }}</option>
+                        {% else %}
+                            <option value="{{ interes.id }}">{{ interes.interestname }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="konfer" style="display:none;">
+            <div class="form-group">
+                <label>Название конференции</label>
+                <select class="form-control" name="scienceworkonference" id="scienceworkonference" style="width: 80%;" disabled>
+                    <option selected disabled></option>
+                    {% for сonfer in conferencelist %}
+                        {% if publication.conference.id == сonfer.id %}
+                            <option selected value="{{ сonfer.id }}">{{ сonfer.conferencename }}</option>
+                        {% else %}
+                            <option value="{{ сonfer.id }}">{{ сonfer.conferencename }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="statusforum" style="display:none;">
+            <div class="form-group">
+                <label>Статус научного форума</label>
+                <select class="form-control" name="scienceworkstatusforum" id="scienceworkstatusforum" style="width: 80%;" disabled>
+                    <option selected disabled></option>
+                    {% for status in statusforumlist %}
+                        {% if publication.forumstatus.id == status.id %}
+                            <option selected value="{{ status.id }}">{{ status.statusname }}</option>
+                        {% else %}
+                            <option value="{{ status.id }}">{{ status.statusname }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="organizatorforum" style="display:none;">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                        <label>Организатор форума</label>
+                        <select class="form-control" name="scienceworkorganizatorforum" id="scienceworkorganizatorforum" style="width: 80%;" disabled>
+                            <option selected disabled></option>
+                            {% for orgforum in orgforumlist %}
+                                {% if publication.organizatorforum.id == orgforum.id %}
+                                    <option selected value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>
+                                {% else %}
+                                    <option value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                        <label>Страна проведения</label>
+                        <select class="form-control" name="scienceworkcityforforum" id="scienceworkcityforforum" style="width: 80%;" disabled>
+                            <option selected disabled></option>
+                            {% for forumcity in cityforumlist %}
+                                {% if publication.forumcountry.id == forumcity.id %}
+                                    <option selected value="{{ forumcity.id }}">{{ forumcity.cityforumtitle }}</option>
+                                {% else %}
+                                    <option value="{{ forumcity.id }}">{{ forumcity.cityforumtitle }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="form-group">
+                        <label>Дата проведения форума</label>
+                        <input type="date" class="form-control" name="forumdate" id="forumdate" style="width: 80%" value="{{ publication.forumdate|date:"Y-m-d" }}" disabled>
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="kindforum" style="display:none;">
+                    <div class="form-group">
+                        <label>Вид научного форума</label>
+                        <select class="form-control" name="scienceworkkindforum" id="scienceworkkindforum" style="width: 80%;" disabled>
+                            <option selected disabled></option>
+                            {% for kind in kindforumlist %}
+                                {% if publication.kindforum.id == kind.id %}
+                                    <option selected value="{{ kind.id }}">{{ kind.kindname }}</option>
+                                {% else %}
+                                    <option value="{{ kind.id }}">{{ kind.kindname }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+{#            <div class="row">#}
+{#                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex flex-row align-items-center">#}
+{#                    <label style="display:none;" id="scienceworkstudentparticipationlabel">Участие обущающихся</label>&nbsp;&nbsp;#}
+{#                    {% if publication.scienceworkstudentparticipation %}#}
+{#                        <input type="checkbox" name="scienceworkstudentparticipation" id="scienceworkstudentparticipation" checked style="display:none;">#}
+{#                    {% else %}#}
+{#                        <input type="checkbox" name="scienceworkstudentparticipation" id="scienceworkstudentparticipation" style="display:none;">#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex flex-row align-items-center">
+            <label style="display:none;" id="scienceworkstudentparticipationlabel">Участие обущающихся</label>&nbsp;&nbsp;
+            {% if publication.scienceworkstudentparticipation %}
+                <input type="checkbox" name="scienceworkstudentparticipation" id="scienceworkstudentparticipation" checked style="display:none;">
+            {% else %}
+                <input type="checkbox" name="scienceworkstudentparticipation" id="scienceworkstudentparticipation" style="display:none;">
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav %}
+    {% include "index/common/navs/nav.html" %}
+{% endblock %}
+{% block side_panel %}
+    {% include "index/common/navs/sidepanel.html"%}
+{% endblock %}
+
+{% block form_title %}{% endblock %}
+
+{% block js %}
+    <script src="{% static 'index/js/check_form.js' %}"></script>
+{% block js_own %}{% endblock %}
+{% endblock %}

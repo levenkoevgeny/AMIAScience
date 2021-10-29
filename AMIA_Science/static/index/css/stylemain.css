@@ -1,0 +1,47 @@
+#navigate {
+    padding: 0;
+    margin-left: 0px;
+}
+
+#navigate li {
+    list-style-type: none;
+}
+
+#navigate li:hover i{
+    color: black;!important;
+}
+
+#navigate i{
+    color: gray;!important;
+}
+
+
+.divforajax {
+    width: 500px;
+    max-height: 200px;
+    overflow: auto;
+    padding-top: 5px;
+}
+
+.ajaxrow, .resultwork, .leaderrow {
+    border-style: none!important;
+}
+
+div.ajaxrow:hover, div.resultwork:hover, div.leaderrow:hover {
+    background-color: #b4b5b5;
+}
+
+.filter{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.select2 {
+    width: 100%!important;
+}
+
+.div_anr_sciencework {
+    width: 1200px;!important;
+}

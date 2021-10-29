@@ -1,0 +1,127 @@
+{% load widget_tweaks %}
+<div class="col-md-6 border-left" id="extradataforsciencework">
+    <p>Дополнительные данные</p>
+    <div class="row">
+        <div class="col-sm-12 extra_divs" id="subspecies">
+            <div class="form-group">
+                <label>Вид издания</label>
+                {% render_field form.subspecies class+="form-control extra_inputs" %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 extra_divs" id="grif">
+            <div class="form-group">
+                <div class="d-flex flex-row">
+                    <div><input type="checkbox" name="grif_check" id="id_grif_check"></div><label>Гриф</label>
+                </div>
+                {% render_field form.grif class+="form-control extra_inputs" %}
+            </div>
+        </div>
+        <div class="col-sm-6 extra_divs" id="publ">
+            <div class="form-group">
+                <label>Издательство</label>
+                {% render_field form.publisher class+="form-control extra_inputs" %}
+            </div>
+        </div>
+    </div>
+    <div class="row extra_divs" id="checkmagaz">
+        <div class="col-sm-12">
+            <div class="row" id="radiocheck">
+                <div class="col-sm-6">
+                    <p><input name="magazinekindradio" id="magazinekindradio" type="radio" value="1" checked>Журнал</p>
+                </div>
+                <div class="col-sm-6">
+                    <p><input name="magazinekindradio" id="digestkindradio" type="radio" value="2">Сборник статей(трудов)</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6" id="magaz">
+                    <div class="form-group">
+                        <label>Название журнала</label>
+                        {% render_field form.magazine class+="form-control extra_inputs" %}
+                    </div>
+                </div>
+                <div class="col-sm-6" id="digest">
+                    <div class="form-group">
+                        <label>Название сборника статей(трудов)</label>
+                        {% render_field form.digest class+="form-control extra_inputs" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 extra_divs" id="interest">
+            <div class="form-group">
+                <label>В чьих интересах</label>
+                {% render_field form.interest class+="form-control extra_inputs" %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 extra_divs" id="sciencework_student_participation">
+            <div class="d-flex flex-row">
+                <div>{% render_field form.scienceworkstudentparticipation type="checkbox" %}</div><label>Участие обущающихся</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 extra_divs" id="forum_result">
+            <div class="d-flex flex-row">
+                 <div>{% render_field form.is_forum_result type="checkbox" %}</div><label>По итогам научного форума</label>
+{#                <div><input type="checkbox" name="forum_result_check" id="forum_result_check"></div><label>По итогам научного форума</label>#}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 extra_divs" id="konfer">
+            <div class="form-group">
+                <label>Название конференции</label>
+                {% render_field form.conference class+="form-control extra_inputs" %}
+            </div>
+        </div>
+
+{#        <div class="col-sm-6 extra_divs" id="statusforum">#}
+{#            <div class="form-group">#}
+{#                <label>Статус научного форума</label>#}
+{#                {% render_field form.forumstatus class+="form-control extra_inputs" %}#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+{#    <div class="row">#}
+{#        <div class="col-sm-6 extra_divs" id="organizatorforum">#}
+{#            <div class="form-group">#}
+{#                <label>Организатор форума</label>#}
+{#                {% render_field form.organizatorforum class+="form-control extra_inputs" %}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-sm-6 extra_divs" id="country">#}
+{#            <div class="form-group">#}
+{#                <label>Страна проведения</label>#}
+{#                {% render_field form.forumcountry class+="form-control extra_inputs" %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 extra_divs" id="forum_date">#}
+{#            <div class="form-group">#}
+{#                <label>Дата проведения форума</label>#}
+{#                {% render_field form.forumdate class+="form-control extra_inputs" %}#}
+{#                <div class="invalid-feedback">#}
+{#                    Заполните поле!#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-sm-6 extra_divs" id="kindforum">#}
+{#            <div class="form-group">#}
+{#                <label>Вид научного форума</label>#}
+{#                {% render_field form.kindforum class+="form-control extra_inputs" %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+</div>

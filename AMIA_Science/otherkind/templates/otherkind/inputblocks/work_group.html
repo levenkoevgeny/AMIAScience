@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="work_group_div" style="display: none;">
+    <div class="row d-flex align-items-end">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label style="line-height: 1;">Наименование исследования, основание включения в состав рабочей группы</label>
+                <textarea id="study_name" name="study_name" class="form-control"  rows="2">{{ obj.study_name }}</textarea>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label style="line-height: 1;">Учреждение, в котором создана рабочая группа (ВНК)</label>
+                <input type="text" id="group_establishment" name="group_establishment" class="form-control" value="{{ obj.group_establishment }}">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label style="line-height: 1;">Результат участия</label>
+                <input type="text" id="participation_result" name="participation_result" class="form-control" value="{{ obj.participation_result }}">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

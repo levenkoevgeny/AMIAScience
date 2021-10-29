@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+
+{% block css %}{% endblock %}
+{% block title %}
+    <title>Кафедры</title>
+{% endblock %}
+
+{% block nav %}
+    {% include "index/common/navs/navforAMIA.html"%}
+{% endblock %}
+
+{% block side_panel %}{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <br>
+        <div class="jumbotron">
+            <h1 class="display-4">Приветственная страница!</h1>
+            <p class="lead">Вводный текст ......</p>
+            <hr class="my-4">
+            <p>Дополнительная информация.....</p>
+{#            <a class="btn btn-primary btn-lg" href="#" role="button">Переход на страницу......</a>#}
+        </div>
+
+
+
+        <ul class="list-group">
+            <li class="list-group-item"><h5>Кафедры</h5></li>
+            {% for subdivision in list %}
+                <tr>
+                    <li class="list-group-item"><a href="{% url 'forAMIA:subdivision_page' subdivision.id %}"> {{ subdivision.get_capital_name }} </a></li>
+                </tr>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+
+{% block js %}{% endblock %}
+
+
+

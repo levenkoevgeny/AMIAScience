@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+
+    <title>Научно-исследовательская работа</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanel.html"%}
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <br>
+            <div id="maincontent">
+                <form class="needs-validation" action="{% url 'nir:addnir' %}" method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                <div class="card-header">Данные научно-исследовательской работы</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Наименование научно-исследовательской работы</label>
+                                                <textarea class="form-control"  name="nirnaimenovanie" id="nirnaimenovanie" rows="2" style="width: 100%" required></textarea>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Дата начала</label>
+                                                <input type="date" class="form-control" name="nirdatebegin" id="nirdatebegin" style="width: 100%;" required>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Дата окончания</label>
+                                                <input type="date" class="form-control" name="nirdateend" id="nirdateend" style="width: 100%;" required>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Дата утверждения отчета</label>
+                                                <input type="date" class="form-control" name="nirdateapprove" id="nirdateapprove" style="width: 100%;">
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                            <div class="form-group">
+                                                <label>Основание для проведения НИР</label>
+                                                <select name="nirreason" id="nirreason" class="form-control" multiple size="3" required>
+                                                    {% for reason in reasonlist %}
+                                                        <option value="{{ reason.id }}">{{ reason.reasonname }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                            <div class="form-group">
+                                                <label>Пункт плана НИД Академии МВД</label>
+                                                <input type="text" class="form-control" name="nirplanitem" id="nirplanitem" placeholder="Введите пункт плана НИД" required>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                            <div class="form-group">
+                                                <label>Результаты исследования</label>
+                                                <select name="nirresult" id="nirresult" class="form-control">
+                                                    <option selected disabled></option>
+                                                    {% for result in resultlist %}
+                                                        <option value="{{ result.id }}">{{ result.researchresultname }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "index/common/author_blocks/authors_employees.html" %}
+                            {% include "index/common/leader_block/leader.html" %}
+                            {#                            {% include "index/common/author_blocks/authors_other.html" %}#}
+
+
+                            <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                <div class="card-header">Организация
+                                    <input type="checkbox" name="organization_check" id="organization_check">
+                                </div>
+                                <div class="card-body" style="display: none;" id="organization_div">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select name="organisation" id="organisation" class="form-control" multiple size="3">
+                                                    {% for organisation in nir_organisation_list %}
+                                                        <option value="{{ organisation.id }}">{{ organisation.organization_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="authorscount" id="authorscount" value="1">
+                        <input type="hidden" name="authorscountother" id="authorscountother" value="1">
+                    </div>
+                    <button type="submit" name="nirksubmit" id="nirksubmit" class="btn btn-primary">Добавить НИР!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'index/js/check_form.js' %}"></script>
+<script src="{% static 'nir/js/nir_main.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#organisation, #nirreason').select2();
+    });
+</script>
+
+</body>
+</html>

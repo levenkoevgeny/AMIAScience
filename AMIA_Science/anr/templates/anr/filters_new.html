@@ -1,0 +1,70 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'anr:list' %}" method="get">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Автор (один либо несколько)</label>
+                {% render_field filter.form.authors class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Подразделение (одно либо несколько)</label>
+                {% render_field filter.form.subdivisions class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Вид внедренной разработки</label>
+                {% render_field filter.form.developmentkind class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Вид внедрения</label>
+                {% render_field filter.form.introductionkind class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Организация внедрения</label>
+                {% render_field filter.form.introductionorganization class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Год c </label>
+                {% render_field filter.form.year_gte class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Год по</label>
+                {% render_field filter.form.year_lte class+="form-control" %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Полугодие</label>
+                {% render_field filter.form.halfyear class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Участие обучающихся</label>
+                {% render_field filter.form.is_student_participation class+="form-control" %}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'anr:list' %}" class="btn btn-outline-dark">Сбросить фильтр</a>
+</form>

@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    {% load reporting_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
+          integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <title>Результативность НИР</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanelreporting.html" %}
+        <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <form class="needs-validation" action="{% url 'reporting:effectivenessnid' %}" method="get"
+                          novalidate>
+                        <div class="card border-dark mb-3" style="max-width: 60rem;">
+                            <div class="card-header">Параметры запроса</div>
+                            <div class="card-body text-dark">
+                                <div class="row" id="radiocheck">
+                                    <input type="hidden"
+                                            {% if radio_value %}
+                                           value="{{ radio_value }}"
+                                            {% else %}
+                                           value="1"
+                                            {% endif %}
+                                           id="radio_value_id">
+                                    <div class="col-sm-6">
+                                        <p><input name="yearradio" id="yearradio" type="radio" value="1" checked>&nbsp;Отчет
+                                            за год</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p><input name="yearradio" id="betweenyearradio" type="radio" value="2">&nbsp;Отчет
+                                            за промежуток лет</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Год</label>
+                                            <input type="number" class="form-control"
+                                                   name="reportingNIDyearsince"
+                                                   id="reportingNIDyear"
+                                                   style="width: 50%;" min="1900"
+                                                    {% if year_since %}
+                                                   value={{ year_since }}
+                                                           {% else %}
+                                                           value="2021"
+                                                    {% endif %}
+                                                   required
+                                            >
+                                            <div class="invalid-feedback">
+                                                Заполните поле!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>С</label>
+                                                    <input type="number"
+                                                           class="form-control"
+                                                           name="reportingNIDyearsince"
+                                                           id="reportingNIDyearsince"
+                                                           style="width: 80%;" min="1900"
+                                                            {% if year_since %}
+                                                           value={{ year_since }}
+                                                                   {% else %}
+                                                                   value="2021"
+                                                            {% endif %}
+                                                           disabled>
+                                                    <div class="invalid-feedback">
+                                                        Заполните поле!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>По</label>
+                                                    <input type="number"
+                                                           class="form-control"
+                                                           name="reportingNIDyeartill"
+                                                           id="reportingNIDyeartill"
+                                                           style="width: 80%;" min="1900"
+                                                            {% if year_till %}
+                                                           value={{ year_till }}
+                                                                   {% else %}
+                                                                   value="2021"
+                                                            {% endif %}
+                                                           disabled>
+                                                    <div class="invalid-feedback">
+                                                        Заполните поле!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" name="reportingsubmit" id="reportingsubmit" class="btn btn-primary">
+                            Создать отчет!
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            {% if publicationlist %}
+                Отчет РЕЗУЛЬТАТИВНОСТЬ НИД по видам разработок и годам
+                <table class="table table-sm table-responsive table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col" rowspan="4">Вид публикации</th>
+                    <th scope="col" colspan="6">Год издания</th>
+                </tr>
+                <tr>
+                    <th scope="col" colspan="2">I полугодие</th>
+                    <th scope="col" colspan="2">II полугодие</th>
+                    <th scope="col" colspan="2">Всего за год</th>
+                </tr>
+                <tr>
+                    <th scope="col" colspan="2">Количество</th>
+                    <th scope="col" colspan="2">Количество</th>
+                    <th scope="col" colspan="2">Количество</th>
+                </tr>
+                <tr>
+                    <th scope="col">Единиц</th>
+                    <th scope="col">Печатных листов</th>
+                    <th scope="col">Единиц</th>
+                    <th scope="col">Печатных листов</th>
+                    <th scope="col">Единиц</th>
+                    <th scope="col">Печатных листов</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for year in year_list %}
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col" colspan="6" class="text-center">{{ year }}
+
+                            <div class="alert alert-primary" role="alert">
+                                (Всего за год - {{ publicationlist|sciencework_count_all:year }}
+                                (I - {{ publicationlist|sciencework_count_all_I:year }}, II - {{ publicationlist|sciencework_count_all_II:year }})
+                                печатных листов - {{ publicationlist|sciencework_sheet_count_all_for_year:year }}
+                                (I - {{ publicationlist|sciencework_sheet_count_all_for_year_I:year }}, II - {{ publicationlist|sciencework_sheet_count_all_for_year_II:year }}))
+                            </div>
+                        </th>
+                    </tr>
+
+                    {% if publicationlist|sciencework_count_all:year != 0 %}
+                        {% for kind in publicationkindlist %}
+                            {% with args=kind.id|add_string:year %}
+                                <tr>
+                                    <td scope="col">{{ kind }}</td>
+                                    <td scope="col">
+                                        {% if kind.id == 3 %}
+                                            {{ publicationlist|sciencework_count_I:args }}<br>
+                                            {% if publicationlist|sciencework_count_I:args != 0 %}
+                                                <b>Из них:</b><br>
+                                                {% for subspecies in subspecieslist %}
+                                                    {% with args_subspecies=subspecies.id|add_string:year %}
+                                                        {% if publicationlist|sciencework_count_subspecies_I:args_subspecies != 0 %}
+                                                            {{ subspecies }} -
+                                                            {{ publicationlist|sciencework_count_subspecies_I:args_subspecies }}
+                                                            <br>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endfor %}
+                                                <b>По грифам:</b><br>
+                                                {% for grif in griflist %}
+                                                    {% with args_grif=grif.id|add_string:year %}
+                                                        {% if publicationlist|sciencework_count_grif_I:args_grif != 0 %}
+                                                            {{ grif.grifname }} -
+                                                            {{ publicationlist|sciencework_count_grif_I:args_grif }}
+                                                            <br>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% elif kind.id == 9 %}
+                                            {{ publicationlist|sciencework_count_I:args }}<br>
+                                            {% if publicationlist|sciencework_count_I:args != 0 %}
+                                                <b>Из них:</b><br>
+                                                ВАК - {{ publicationlist|sciencework_publication_invak_I:args }}<br>
+                                                Не ВАК -
+                                                {{ publicationlist|sciencework_publication_not_invak_I:args }}:<br>
+                                                По итогам научного форума - {{ publicationlist|is_forum_result_I:args }}
+                                                <br>
+                                            {% endif %}
+                                        {% else %}
+                                            {{ publicationlist|sciencework_count_I:args }}<br>
+                                        {% endif %}
+                                    </td>
+                                    <td scope="col">{{ publicationlist|sciencework_count_I_pages:args }}</td>
+                                    <td scope="col">
+                                        {% if kind.id == 3 %}
+                                            {{ publicationlist|sciencework_count_II:args }}<br>
+                                            {% if publicationlist|sciencework_count_II:args != 0 %}
+                                                <b>Из них:</b><br>
+                                                {% for subspecies in subspecieslist %}
+                                                    {% with args_subspecies=subspecies.id|add_string:year %}
+                                                        {% if publicationlist|sciencework_count_subspecies_II:args_subspecies != 0 %}
+                                                            {{ subspecies }} -
+                                                            {{ publicationlist|sciencework_count_subspecies_II:args_subspecies }}
+                                                            <br>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endfor %}
+                                                <b>По грифам:</b><br>
+                                                {% for grif in griflist %}
+                                                    {% with args_grif=grif.id|add_string:year %}
+                                                        {% if publicationlist|sciencework_count_grif_II:args_grif != 0 %}
+                                                            {{ grif.grifname }} -
+                                                            {{ publicationlist|sciencework_count_grif_II:args_grif }}
+                                                            <br>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% elif kind.id == 9 %}
+                                            {{ publicationlist|sciencework_count_II:args }}<br>
+                                            {% if publicationlist|sciencework_count:args != 0 %}
+                                                <b>Из них:</b><br>
+                                                ВАК - {{ publicationlist|sciencework_publication_invak_II:args }}
+                                                <br>
+                                                Не ВАК -
+                                                {{ publicationlist|sciencework_publication_not_invak_II:args }}<br>
+                                                По итогам научного форума - {{ publicationlist|is_forum_result_II:args }}
+                                            {% endif %}
+                                        {% else %}
+                                            {{ publicationlist|sciencework_count_II:args }}<br>
+                                        {% endif %}
+                                    </td>
+                                    <td scope="col">{{ publicationlist|sciencework_count_II_pages:args }}</td>
+                                    <td scope="col">
+                                        {% if kind.id == 3 %}
+                                            {{ publicationlist|sciencework_count:args }}<br>
+                                            {% if publicationlist|sciencework_count:args != 0 %}
+                                                <b>Из них:</b><br>
+                                                {% for subspecies in subspecieslist %}
+                                                    {% with args_subspecies=subspecies.id|add_string:year %}
+                                                        {% if publicationlist|sciencework_count_subspecies:args_subspecies != 0 %}
+                                                            {{ subspecies }} -
+                                                            {{ publicationlist|sciencework_count_subspecies:args_subspecies }}
+                                                            <br>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endfor %}
+                                                <b>По грифам:</b><br>
+                                                {% for grif in griflist %}
+                                                    {% with args_grif=grif.id|add_string:year %}
+                                                        {% if publicationlist|sciencework_count_grif:args_grif != 0 %}
+                                                            {{ grif.grifname }} -
+                                                            {{ publicationlist|sciencework_count_grif:args_grif }}
+                                                            <br>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% elif kind.id == 9 %}
+                                            {{ publicationlist|sciencework_count:args }}<br>
+                                            {% if publicationlist|sciencework_count:args != 0 %}
+                                                <b>Из них:</b><br>
+                                                ВАК - {{ publicationlist|sciencework_publication_invak:args }}<br>
+                                                Не ВАК -
+                                                {{ publicationlist|sciencework_publication_not_invak:args }}<br>
+                                                По итогам научного форума - {{ publicationlist|is_forum_result:args }}
+                                            {% endif %}
+                                        {% else %}
+                                            {{ publicationlist|sciencework_count:args }}<br>
+                                        {% endif %}
+                                    </td>
+                                    <td scope="col">{{ publicationlist|sciencework_count_pages:args }}</td>
+                                </tr>
+                            {% endwith %}
+                        {% endfor %}
+                    {% endif %}
+
+                {% endfor %}
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col" colspan="6">
+                        <div class="alert alert-warning" role="alert">
+                            <h3>Всего за выбранный период</h3>
+                        </div>
+                    </th>
+                </tr>
+
+                {% for kind in publicationkindlist %}
+                    <tr>
+                        <td scope="col">{{ kind }}</td>
+                        <td scope="col">
+                            {% if kind.id == 3 %}
+                                {{ publicationlist|sciencework_count_all_kind_I:kind.id }}<br>
+                                <b>Из них:</b><br>
+                                {% for subspecies in subspecieslist %}
+                                    {% if publicationlist|sciencework_count_all_subspecies_I:subspecies.id != 0 %}
+                                        {{ subspecies }}
+                                        - {{ publicationlist|sciencework_count_all_subspecies_I:subspecies.id }}
+                                        <br>
+                                    {% endif %}
+                                {% endfor %}
+                                <b>По грифам:</b><br>
+                                {% for grif in griflist %}
+                                    {% if publicationlist|sciencework_count_all_grif_I:grif.id != 0 %}
+                                        {{ grif.grifname }}
+                                        - {{ publicationlist|sciencework_count_all_grif_I:grif.id }}<br>
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% elif kind.id == 9 %}
+                                {% if publicationlist|sciencework_count_all_kind_I:kind.id != 0 %}
+                                    {{ publicationlist|sciencework_count_all_kind_I:kind.id }}<br>
+                                    <b>Из них:</b><br>
+                                    ВАК - {{ publicationlist|sciencework_publication_all_invak_I:kind.id }}<br>
+                                    Не ВАК - {{ publicationlist|sciencework_publication_all_not_invak_I:kind.id }}<br>
+                                    По итогам научного форума - {{ publicationlist|all_is_forum_result_I:kind.id }}
+                                    <br>
+                                {% endif %}
+                            {% else %}
+                                {{ publicationlist|sciencework_count_all_kind_I:kind.id }}<br>
+                            {% endif %}
+                        </td>
+                        <td scope="col">{{ publicationlist|sciencework_count_all_pages_I:kind.id }}</td>
+
+                        <td scope="col">
+                            {% if kind.id == 3 %}
+                                {{ publicationlist|sciencework_count_all_kind_II:kind.id }}<br>
+                                <b>Из них:</b><br>
+                                {% for subspecies in subspecieslist %}
+                                    {% if publicationlist|sciencework_count_all_subspecies_II:subspecies.id != 0 %}
+                                        {{ subspecies }}
+                                        - {{ publicationlist|sciencework_count_all_subspecies_II:subspecies.id }}
+                                        <br>
+                                    {% endif %}
+                                {% endfor %}
+                                <b>По грифам:</b><br>
+                                {% for grif in griflist %}
+                                    {% if publicationlist|sciencework_count_all_grif_II:grif.id != 0 %}
+                                        {{ grif.grifname }}
+                                        - {{ publicationlist|sciencework_count_all_grif_II:grif.id }}<br>
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% elif kind.id == 9 %}
+                                {% if publicationlist|sciencework_count_all_kind_II:kind.id != 0 %}
+                                    {{ publicationlist|sciencework_count_all_kind_II:kind.id }}<br>
+                                    <b>Из них:</b><br>
+                                    ВАК - {{ publicationlist|sciencework_publication_all_invak_II:kind.id }}<br>
+                                    Не ВАК - {{ publicationlist|sciencework_publication_all_not_invak_II:kind.id }}<br>
+                                    По итогам научного форума - {{ publicationlist|all_is_forum_result_II:kind.id }}
+                                    <br>
+                                {% endif %}
+                            {% else %}
+                                {{ publicationlist|sciencework_count_all_kind_II:kind.id }}<br>
+                            {% endif %}
+                        </td>
+                        <td scope="col">{{ publicationlist|sciencework_count_all_pages_II:kind.id }}</td>
+
+                        <td scope="col">
+                            {% if kind.id == 3 %}
+                                {{ publicationlist|sciencework_count_all_kind:kind.id }}<br>
+                                <b>Из них:</b><br>
+                                {% for subspecies in subspecieslist %}
+                                    {% if publicationlist|sciencework_count_all_subspecies:subspecies.id != 0 %}
+                                        {{ subspecies }}
+                                        - {{ publicationlist|sciencework_count_all_subspecies:subspecies.id }}
+                                        <br>
+                                    {% endif %}
+                                {% endfor %}
+                                <b>По грифам:</b><br>
+                                {% for grif in griflist %}
+                                    {% if publicationlist|sciencework_count_all_grif:grif.id != 0 %}
+                                        {{ grif.grifname }}
+                                        - {{ publicationlist|sciencework_count_all_grif:grif.id }}<br>
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% elif kind.id == 9 %}
+                                {% if publicationlist|sciencework_count_all_kind:kind.id != 0 %}
+                                    {{ publicationlist|sciencework_count_all_kind:kind.id }}<br>
+                                    <b>Из них:</b><br>
+                                    ВАК - {{ publicationlist|sciencework_publication_all_invak:kind.id }}<br>
+                                    Не ВАК - {{ publicationlist|sciencework_publication_all_not_invak:kind.id }}<br>
+                                    По итогам научного форума - {{ publicationlist|all_is_forum_result:kind.id }}
+                                    <br>
+                                {% endif %}
+                            {% else %}
+                                {{ publicationlist|sciencework_count_all_kind:kind.id }}<br>
+                            {% endif %}
+                        </td>
+                        <td scope="col">{{ publicationlist|sciencework_count_all_pages:kind.id }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+            </table>
+            {% if publicationlist %}
+                <div class="alert alert-success" role="alert">
+                    <h3>Всего работ за выбранный период - <b>{{ publicationlist.all.count }}</b></h3>
+                    <h3>Всего печатных листов за выбранный период - <b>{{ publicationlist_pages_count }}</b></h3>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+
+<script src="{% static 'index/js/check_form.js' %}"></script>
+<script src="{% static 'reporting/js/effectNID.js' %}"></script>
+
+</body>
+</html>

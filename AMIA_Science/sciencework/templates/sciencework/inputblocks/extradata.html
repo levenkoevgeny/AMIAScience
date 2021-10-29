@@ -1,0 +1,598 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title></title>#}
+{#</head>#}
+{#<body>#}
+{#<div class="col-md-6 border-left" id="extradataforsciencework">#}
+{##}
+{#    <p>Дополнительные данные</p>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="subspecies" style="display:none;">#}
+{#            <label>Вид издания</label>#}
+{#            <select class="form-control" name="scienceworksubspecies" id="scienceworksubspecies" disabled>#}
+{#                <option selected disabled></option>#}
+{#                {% for subspecies in subspecieslist %}#}
+{#                    <option value="{{ subspecies.id }}">{{ subspecies.title }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="publ" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Издательство</label>#}
+{#                <select class="form-control" name="scienceworkpublisher" id="scienceworkpublisher" style="width: 80%;" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for publisher in publisherlist %}#}
+{#                        <option value="{{ publisher.id }}">{{ publisher.publishername }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="grif" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Гриф</label>#}
+{#                <select class="form-control" name="scienceworkgrif" id="scienceworkgrif" style="width: 80%;"disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for grif in griflist %}#}
+{#                        <option value="{{ grif.id }}">{{ grif.grifname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row" id="checkmagaz" style="display:none;">#}
+{#        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">#}
+{#            <div class="row" id="radiocheck">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <p><input name="magazinekindradio" id="magazinekindradio" type="radio" value="1" checked>Журнал</p>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <p><input name="magazinekindradio" id="digestkindradio" type="radio" value="2">Сборник статей(трудов)</p>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="magaz">#}
+{#                    <div class="form-group">#}
+{#                        <label>Название журнала</label>#}
+{#                        <select class="form-control" name="scienceworkmagazinetitle" id="scienceworkmagazinetitle" style="width: 80%;">#}
+{#                            <option selected disabled></option>#}
+{#                            {% for magazine in magazinelist %}#}
+{#                                <option value="{{ magazine.id }}">{{ magazine.magazinename }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="digest">#}
+{#                    <div class="form-group">#}
+{#                        <label>Название сборника статей(трудов)</label>#}
+{#                        <select disabled class="form-control" name="scienceworkdigesttitle" id="scienceworkdigesttitle" style="width: 80%;">#}
+{#                            <option selected disabled></option>#}
+{#                            {% for digest in digestlist %}#}
+{#                                <option value="{{ digest.id }}">{{ digest.digestname }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="orgfounder" style="display:none;">#}
+{#            <label>Организация учредитель сборника научных статей</label>#}
+{#            <select class="form-control" name="scienceworkorgfounder" id="scienceworkorgfounder" style="width: 80%;" disabled>#}
+{#                <option selected disabled></option>#}
+{#                {% for orgfounder in orgfounderlist %}#}
+{#                    <option value="{{orgfounder.id }}">{{ orgfounder.orgname }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="interbase" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Международная база научного цитирования</label>#}
+{#                <select class="form-control" name="scienceworkcitation" id="scienceworkcitation" style="width: 80%;" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for base in internationalbaselist %}#}
+{#                        <option value="{{ base.id }}">{{ base.basename }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="interest" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>В чьих интересах</label>#}
+{#                <select class="form-control" name="scienceworkinterest" id="scienceworkinterest" style="width: 80%;" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for interes in interestlist %}#}
+{#                        <option value="{{ interes.id }}">{{ interes.interestname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="konfer" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Название конференции</label>#}
+{#                <select class="form-control" name="scienceworkonference" id="scienceworkonference" style="width: 80%;" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for konfer in conferencelist %}#}
+{#                        <option value="{{ konfer.id }}">{{ konfer.conferencename }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="statusforum" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Статус научного форума</label>#}
+{#                <select class="form-control" name="scienceworkstatusforum" id="scienceworkstatusforum" style="width: 80%;" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for status in statusforumlist %}#}
+{#                        <option value="{{ status.id }}">{{ status.statusname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="organizatorforum" style="display:none;">#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <div class="form-group">#}
+{#                        <label>Организатор форума</label>#}
+{#                        <select class="form-control" name="scienceworkorganizatorforum" id="scienceworkorganizatorforum" style="width: 80%;" disabled>#}
+{#                            <option selected disabled></option>#}
+{#                            {% for orgforum in orgforumlist %}#}
+{#                                <option value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <div class="form-group">#}
+{#                        <label>Страна проведения</label>#}
+{#                        <select class="form-control" name="scienceworkcityforforum" id="scienceworkcityforforum" style="width: 80%;" disabled>#}
+{#                            <option selected disabled></option>#}
+{#                            {% for forumcity in cityforumlist %}#}
+{#                                <option value="{{ forumcity.id }}">{{ forumcity.cityforumtitle }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <div class="form-group">#}
+{#                        <label>Дата проведения форума</label>#}
+{#                        <input type="date" class="form-control" name="forumdate" id="forumdate" style="width: 80%" disabled>#}
+{#                        <div class="invalid-feedback">#}
+{#                            Заполните поле!#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="kindforum" style="display:none;">#}
+{#                    <div class="form-group">#}
+{#                        <label>Вид научного форума</label>#}
+{#                        <select class="form-control" name="scienceworkkindforum" id="scienceworkkindforum" style="width: 80%;" disabled>#}
+{#                            <option selected disabled></option>#}
+{#                            {% for kind in kindforumlist %}#}
+{#                                <option value="{{ kind.id }}">{{ kind.kindname }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex flex-row align-items-center">#}
+{#                    <label style="display:none;" id="scienceworkstudentparticipationlabel">Участие обущающихся</label>&nbsp;#}
+{#                    <input type="checkbox" name="scienceworkstudentparticipation" id="scienceworkstudentparticipation" style="display:none;" disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-xl-12" id="subspecies">#}
+{#            <label>Вид издания</label>#}
+{#            <select class="form-control" name="scienceworksubspecies" id="scienceworksubspecies">#}
+{#                <option selected disabled></option>#}
+{#                {% for subspecies in subspecieslist %}#}
+{#                    <option value="{{ subspecies.id }}">{{ subspecies.title }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-xl-6" id="publ">#}
+{#            <div class="form-group">#}
+{#                <label>Издательство</label>#}
+{#                <select class="form-control" name="scienceworkpublisher" id="scienceworkpublisher">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for publisher in publisherlist %}#}
+{#                        <option value="{{ publisher.id }}">{{ publisher.publishername }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-xl-6" id="grif">#}
+{#            <div class="form-group">#}
+{#                <label>Гриф</label>#}
+{#                <select class="form-control" name="scienceworkgrif" id="scienceworkgrif">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for grif in griflist %}#}
+{#                        <option value="{{ grif.id }}">{{ grif.grifname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row" id="checkmagaz">#}
+{#        <div class="col-xl-12">#}
+{#            <div class="row" id="radiocheck">#}
+{#                <div class="col-xl-6">#}
+{#                    <p><input name="magazinekindradio" id="magazinekindradio" type="radio" value="1" checked>Журнал</p>#}
+{#                </div>#}
+{#                <div class="col-xl-6">#}
+{#                    <p><input name="magazinekindradio" id="digestkindradio" type="radio" value="2">Сборник статей(трудов)</p>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-xl-6" id="magaz">#}
+{#                    <div class="form-group">#}
+{#                        <label>Название журнала</label>#}
+{#                        <select class="form-control" name="scienceworkmagazinetitle" id="scienceworkmagazinetitle">#}
+{#                            <option selected disabled></option>#}
+{#                            {% for magazine in magazinelist %}#}
+{#                                <option value="{{ magazine.id }}">{{ magazine.magazinename }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-xl-6" id="digest">#}
+{#                    <div class="form-group">#}
+{#                        <label>Название сборника статей(трудов)</label>#}
+{#                        <select disabled class="form-control" name="scienceworkdigesttitle" id="scienceworkdigesttitle">#}
+{#                            <option selected disabled></option>#}
+{#                            {% for digest in digestlist %}#}
+{#                                <option value="{{ digest.id }}">{{ digest.digestname }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-xl-6" id="orgfounder">#}
+{#            <label>Организация учредитель сборника научных статей</label>#}
+{#            <select class="form-control" name="scienceworkorgfounder" id="scienceworkorgfounder">#}
+{#                <option selected disabled></option>#}
+{#                {% for orgfounder in orgfounderlist %}#}
+{#                    <option value="{{orgfounder.id }}">{{ orgfounder.orgname }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-6" id="interbase">#}
+{#            <div class="form-group">#}
+{#                <label>Международная база научного цитирования</label>&nbsp;&nbsp;<input type="checkbox" name="scienceworkcitationcheck" id="scienceworkcitationcheck">#}
+{#                <select class="form-control" name="scienceworkcitation" id="scienceworkcitation">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for base in internationalbaselist %}#}
+{#                        <option value="{{ base.id }}">{{ base.basename }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-6" id="interest">#}
+{#            <div class="form-group">#}
+{#                <label>В чьих интересах</label>#}
+{#                <select class="form-control" name="scienceworkinterest" id="scienceworkinterest">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for interes in interestlist %}#}
+{#                        <option value="{{ interes.id }}">{{ interes.interestname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-xl-6" id="konfer">#}
+{#            <div class="form-group">#}
+{#                <label>Название конференции</label>#}
+{#                <select class="form-control" name="scienceworkonference" id="scienceworkonference">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for konfer in conferencelist %}#}
+{#                        <option value="{{ konfer.id }}">{{ konfer.conferencename }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-xl-6" id="statusforum">#}
+{#            <div class="form-group">#}
+{#                <label>Статус научного форума</label>#}
+{#                <select class="form-control" name="scienceworkstatusforum" id="scienceworkstatusforum">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for status in statusforumlist %}#}
+{#                        <option value="{{ status.id }}">{{ status.statusname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-xl-6" id="organizatorforum">#}
+{#            <div class="form-group">#}
+{#                <label>Организатор форума</label>#}
+{#                <select class="form-control" name="scienceworkorganizatorforum" id="scienceworkorganizatorforum">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for orgforum in orgforumlist %}#}
+{#                        <option value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-xl-6" id="country">#}
+{#            <div class="form-group">#}
+{#                <label>Страна проведения</label>#}
+{#                <select class="form-control" name="scienceworkcityforforum" id="scienceworkcityforforum">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for forumcity in cityforumlist %}#}
+{#                        <option value="{{ forumcity.id }}">{{ forumcity.cityforumtitle }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#            <div class="form-group">#}
+{#                <label>Дата проведения форума</label>#}
+{#                <input type="date" class="form-control" name="forumdate" id="forumdate">#}
+{#                <div class="invalid-feedback">#}
+{#                    Заполните поле!#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-xl-6" id="kindforum">#}
+{#            <div class="form-group">#}
+{#                <label>Вид научного форума</label>#}
+{#                <select class="form-control" name="scienceworkkindforum" id="scienceworkkindforum">#}
+{#                    <option selected disabled></option>#}
+{#                    {% for kind in kindforumlist %}#}
+{#                        <option value="{{ kind.id }}">{{ kind.kindname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-lg-6 d-flex flex-row align-items-center">#}
+{#            <label id="scienceworkstudentparticipationlabel">Участие обущающихся</label>&nbsp;#}
+{#            <input type="checkbox" name="scienceworkstudentparticipation" id="scienceworkstudentparticipation">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#        </div>#}
+{#        <div class="col-lg-6 d-flex flex-row align-items-center">#}
+{#            <label id="sciencework_forum_result_label">По итогам научного форума</label>&nbsp;#}
+{#            <input type="checkbox" name="sciencework_forum_result" id="sciencework_forum_result">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{#    <div class="row">#}
+{##}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="grif" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Гриф</label>#}
+{#                <select class="form-control" name="scienceworkgrif" id="scienceworkgrif" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for grif in griflist %}#}
+{#                        <option value="{{ grif.id }}">{{ grif.grifname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row" id="checkmagaz" style="display:none;">#}
+{#        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">#}
+{#            <div class="row" id="radiocheck">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <p><input name="magazinekindradio" id="magazinekindradio" type="radio" value="1" checked>Журнал</p>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <p><input name="magazinekindradio" id="digestkindradio" type="radio" value="2">Сборник статей(трудов)</p>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="magaz">#}
+{#                    <div class="form-group">#}
+{#                        <label>Название журнала</label>#}
+{#                        <select class="form-control" name="scienceworkmagazinetitle" id="scienceworkmagazinetitle">#}
+{#                            <option selected disabled></option>#}
+{#                            {% for magazine in magazinelist %}#}
+{#                                <option value="{{ magazine.id }}">{{ magazine.magazinename }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="digest">#}
+{#                    <div class="form-group">#}
+{#                        <label>Название сборника статей(трудов)</label>#}
+{#                        <select disabled class="form-control" name="scienceworkdigesttitle" id="scienceworkdigesttitle">#}
+{#                            <option selected disabled></option>#}
+{#                            {% for digest in digestlist %}#}
+{#                                <option value="{{ digest.id }}">{{ digest.digestname }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="orgfounder" style="display:none;">#}
+{#            <label>Организация учредитель сборника научных статей</label>#}
+{#            <select class="form-control" name="scienceworkorgfounder" id="scienceworkorgfounder" disabled>#}
+{#                <option selected disabled></option>#}
+{#                {% for orgfounder in orgfounderlist %}#}
+{#                    <option value="{{orgfounder.id }}">{{ orgfounder.orgname }}</option>#}
+{#                {% endfor %}#}
+{#            </select>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="interbase" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Международная база научного цитирования</label>&nbsp;&nbsp;<input type="checkbox" name="scienceworkcitationcheck" id="scienceworkcitationcheck">#}
+{#                <select class="form-control" name="scienceworkcitation" id="scienceworkcitation" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for base in internationalbaselist %}#}
+{#                        <option value="{{ base.id }}">{{ base.basename }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="interest" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>В чьих интересах</label>#}
+{#                <select class="form-control" name="scienceworkinterest" id="scienceworkinterest" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for interes in interestlist %}#}
+{#                        <option value="{{ interes.id }}">{{ interes.interestname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="konfer" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Название конференции</label>#}
+{#                <select class="form-control" name="scienceworkonference" id="scienceworkonference" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for konfer in conferencelist %}#}
+{#                        <option value="{{ konfer.id }}">{{ konfer.conferencename }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="statusforum" style="display:none;">#}
+{#            <div class="form-group">#}
+{#                <label>Статус научного форума</label>#}
+{#                <select class="form-control" name="scienceworkstatusforum" id="scienceworkstatusforum" disabled>#}
+{#                    <option selected disabled></option>#}
+{#                    {% for status in statusforumlist %}#}
+{#                        <option value="{{ status.id }}">{{ status.statusname }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <div class="row">#}
+{#        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="organizatorforum" style="display:none;">#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <div class="form-group">#}
+{#                        <label>Организатор форума</label>#}
+{#                        <select class="form-control" name="scienceworkorganizatorforum" id="scienceworkorganizatorforum" disabled>#}
+{#                            <option selected disabled></option>#}
+{#                            {% for orgforum in orgforumlist %}#}
+{#                                <option value="{{ orgforum.id }}">{{ orgforum.orgname }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <div class="form-group">#}
+{#                        <label>Страна проведения</label>#}
+{#                        <select class="form-control" name="scienceworkcityforforum" id="scienceworkcityforforum" disabled>#}
+{#                            <option selected disabled></option>#}
+{#                            {% for forumcity in cityforumlist %}#}
+{#                                <option value="{{ forumcity.id }}">{{ forumcity.cityforumtitle }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">#}
+{#                    <div class="form-group">#}
+{#                        <label>Дата проведения форума</label>#}
+{#                        <input type="date" class="form-control" name="forumdate" id="forumdate" disabled>#}
+{#                        <div class="invalid-feedback">#}
+{#                            Заполните поле!#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6" id="kindforum" style="display:none;">#}
+{#                    <div class="form-group">#}
+{#                        <label>Вид научного форума</label>#}
+{#                        <select class="form-control" name="scienceworkkindforum" id="scienceworkkindforum" disabled>#}
+{#                            <option selected disabled></option>#}
+{#                            {% for kind in kindforumlist %}#}
+{#                                <option value="{{ kind.id }}">{{ kind.kindname }}</option>#}
+{#                            {% endfor %}#}
+{#                        </select>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="row">#}
+{#        <div class="col-lg-6 d-flex flex-row align-items-center">#}
+{#            <label style="display:none;" id="scienceworkstudentparticipationlabel">Участие обущающихся</label>&nbsp;#}
+{#            <input type="checkbox" name="scienceworkstudentparticipation" id="scienceworkstudentparticipation" style="display:none;" disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#        </div>#}
+{#        <div class="col-lg-6 d-flex flex-row align-items-center">#}
+{#            <label style="display:none;" id="sciencework_forum_result_label">По итогам научного форума</label>&nbsp;#}
+{#            <input type="checkbox" name="sciencework_forum_result" id="sciencework_forum_result" style="display:none;" disabled>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#</div>#}
+{#</body>#}
+{#</html>#}

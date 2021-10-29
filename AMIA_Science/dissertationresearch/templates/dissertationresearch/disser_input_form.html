@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    {% load widget_tweaks %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <title>Диссертационные исследования</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+
+    <div class="row">
+        {% include "index/common/navs/sidepanel.html"%}
+        <div class="col-sm-10">
+            <br>
+            <div id="maincontent">
+                <br>
+                {% for error in form.non_field_errors %}
+                    <b>{{ field.label }} {{ error }}</b><br>
+                {% endfor %}
+
+                {% for field in form %}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <b>{{ field.label }} {{ error }}</b><br>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+
+                <div id="dissertation">
+                    {% block form_title %}
+                        <form class="needs-validation" action="{% url 'dissertation:input_form' %}" method="post" novalidate>
+                    {% endblock %}
+                    {% csrf_token %}
+                    {#                        Данные диссертационного исследования#}
+                    {% include "dissertationresearch/inputblocks_form/main_data.html"%}
+                    {#                        Автор исследования#}
+                    {% include "dissertationresearch/inputblocks_form/author.html"%}
+                    {#                        Научный руководитель, консультант#}
+                    {% include "dissertationresearch/inputblocks_form/leader.html"%}
+                    {#                        Место проведения исследования#}
+                    {% include "dissertationresearch/inputblocks_form/place.html"%}
+                    {% block button %}
+                        <button type="submit" class="btn btn-primary">Добавить!</button>
+                    {% endblock %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{% static 'index/js/check_form.js' %}"></script>
+<script src="{% static 'dissertationresearch/js/dissertation_form_main.js' %}"></script>
+
+</body>
+</html>

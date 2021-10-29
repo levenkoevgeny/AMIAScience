@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title></title>
+</head>
+<body>
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Научный руководитель (консультант)
+        {% if obj.leadersnotemployees or obj.leadersemployees %}
+            <input type="checkbox" name="thereis" id="thereis" checked>
+        {% else %}
+            <input type="checkbox" name="thereis" id="thereis">
+        {% endif %}
+    </div>
+    <div class="card-body" id="thereisleader" style="display: none;">
+        <div class="col-sm-6 d-flex flex-row align-items-center form-group">
+            <label>Не является сотрудником Академии МВД РБ</label>&nbsp;
+            {% if obj.leadersnotemployees %}
+                <input type="checkbox" name="leaderisemployee" id="leaderisemployee" checked>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% else %}
+                <input type="checkbox" name="leaderisemployee" id="leaderisemployee">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {% endif %}
+        </div>
+        <div id="divforleaderemployee">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 form-group">
+                    {% if obj.leadersemployees %}
+                        <input type="text" class="form-control leaderinput" name="inputleader" id="inputleader" placeholder="Начните вводить фамилию..." value="{{ obj.leadersemployees.lastname }} {{ obj.leadersemployees.firstname|slice:":1" }}.{{ obj.leadersemployees.patronymic|slice:":1"}}." disabled>
+                        <input type="hidden" id="leaderhidden" name="leaderhidden" class="leaderhidden" value="{{ obj.leadersemployees.id }}">
+                    {% else %}
+                        <input type="text" class="form-control leaderinput" name="inputleader" id="inputleader" placeholder="Начните вводить фамилию..." disabled>
+                        <input type="hidden" id="leaderhidden" name="leaderhidden" class="leaderhidden">
+                    {% endif %}
+                    <div id="leaderajax" class="divforajax"></div>
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 two">
+                    <div class="d-flex align-items-center flex-row justify-content-between">
+                        <input type="text" disabled class="form-control disabledextrainputleader" id="disabledextrainputleader" style="width: 90%;" value="{{ obj.leadersemployees.subdivision.subdivisionname }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="divfornotleaderemployee" style="display:none;">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        <label>Фамилия</label>
+                        <input type="text" class="form-control" name="disserleaderlastname" id="disserleaderlastname" placeholder="Введите фамилию" value="{{ obj.leadersnotemployees.lastname }}" disabled>
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        <label>Инициалы</label>
+                        <input type="text" class="form-control" name="disserleaderinitials" id="disserleaderinitials" placeholder="Введите инициалы" value="{{ obj.leadersnotemployees.initials }}" disabled>
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div class="form-group">
+                        <label>Место работы</label>
+                        <input type="text" class="form-control" name="disserleaderjob" id="disserleaderjob" placeholder="Введите место работы" value="{{ obj.leadersnotemployees.job }}" disabled>
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+{#                <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">#}
+{#                    <div class="form-group">#}
+{#                        <label>Должность</label>#}
+{#                        <input type="text" class="form-control" name="disserleaderposition" id="disserleaderposition" placeholder="Введите должность" value="{{ obj.leadersnotemployees.position }}" disabled>#}
+{#                        <div class="invalid-feedback">#}
+{#                            Заполните поле!#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Ученое звание</label>
+                        {% if obj.leadersnotemployees %}
+                            <select class="form-control" name="academicrank" id="academicrank" disabled>
+                                <option disabled></option>
+                                {% for academicrank in academicranklist %}
+                                    {% if obj.academicrank.id == academicrank.id %}
+                                        <option selected value="{{ academicrank.id }}">{{ academicrank.title }}</option>
+                                    {% else %}
+                                        <option value="{{ academicrank.id }}">{{ academicrank.title }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <select class="form-control" name="academicrank" id="academicrank" disabled>
+                                <option selected disabled></option>
+                                {% for rank in academicranklist %}
+                                    <option value="{{ rank.id }}">{{ rank.title }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Ученая степень</label>
+                        {% if obj.leadersnotemployees %}
+                            <select class="form-control" name="academicdegree" id="academicdegree" disabled>
+                                <option disabled></option>
+                                {% for academicdegree in academicdegreelist %}
+                                    {% if obj.academicdegree.id == academicdegree.id %}
+                                        <option selected value="{{ academicdegree.id }}">{{ academicdegree.title }}</option>
+                                    {% else %}
+                                        <option value="{{ academicdegree.id }}">{{ academicdegree.title }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        {% else %}
+                            <select class="form-control" name="academicdegree" id="academicdegree" disabled>
+                                <option selected disabled></option>
+                                {% for academicdegree in academicdegreelist %}
+                                    <option value="{{ academicdegree.id }}">{{ academicdegree.title }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        <div class="invalid-feedback">
+                            Заполните поле!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'index/js/leader/leader_ajax.js' %}"></script>
+<script src="{% static 'index/js/leader/leader_main.js' %}"></script>
+<script src="{% static 'index/js/leader/leader_update.js' %}"></script>
+</body>
+</html>

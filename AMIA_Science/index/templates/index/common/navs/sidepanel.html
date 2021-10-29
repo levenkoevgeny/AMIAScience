@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'authors/css/style.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <title></title>
+</head>
+<body>
+<div class="col-md-2 border-right" style="background-color: #f8f9fa; height: 92vh">
+    <br>
+    <div><b>Ввод данных</b></div>
+    <ul id="navigate">
+        <li id="setemployeepage"><a class="nav-link" href="{% url 'authors:list' %}" style="color: black;"><i class="far fa-address-card"></i> Сотрудники Академии <span class="badge badge-secondary">{{ authorcount }}</span></a></li>
+{#        <li id="setemployeepage"><a class="nav-link" href="{% url 'authors:inputother' %}" style="color: black;"><i class="far fa-address-card"></i> Сторонние авторы <span class="badge badge-secondary">{{ otherauthorscount }}</span></a></li>#}
+        <li id="setsubdivisionpage"><a class="nav-link" href="{% url 'sciencework:list' %}" style="color: black;"><i class="fas fa-book"></i> Публикации <span class="badge badge-secondary">{{ publicationcount }}</span></a></li>
+        <li id="setsubdivisionpage"><a class="nav-link" href="{% url 'nir:list' %}" style="color: black;"><i class="fas fa-book"></i> Научно-исследовательские работы <span class="badge badge-secondary">{{ nircount }}</span></a></li>
+        <li id="setsubdivisionpage"><a class="nav-link" href="{% url 'pld:list' %}" style="color: black;"><i class="far fa-newspaper"></i> Патентно-лицензионная деятельность <span class="badge badge-secondary">{{ pldcount }}</span></a></li>
+        <li id="setsubdivisionpage"><a class="nav-link" href="{% url 'dissertation:list' %}" style="color: black;"><i class="far fa-newspaper"></i> Диссертационные исследования <span class="badge badge-secondary">{{ discount }}</span></a></li>
+        <li id="setsubdivisionpage"><a class="nav-link" href="{% url 'anr:list' %}" style="color: black;"><i class="fas fa-atom"></i> Внедрение результатов НИД <span class="badge badge-secondary">{{ anrcount }}</span></a></li>
+        <li id="setsubdivisionpage"><a class="nav-link" href="{% url 'other:list' %}" style="color: black;"><i class="fas fa-bars"></i> Иные виды деятельности <span class="badge badge-secondary">{{ otherkindcount }}</span></a></li>
+        <li id="setsubdivisionpage"><a class="nav-link" href="{% url 'sciencework:conference_list' %}" style="color: black;"><i class="fas fa-bars"></i> Конференции <span class="badge badge-secondary">{{ conference_count }}</span></a></li>
+    </ul>
+</div>
+</body>
+</html>

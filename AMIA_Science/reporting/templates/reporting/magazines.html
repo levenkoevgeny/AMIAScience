@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    {% load reporting_tags %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+
+    <title>Журналы</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanelreporting.html" %}
+        <div class="col-sm-10">
+            <br><br>
+
+            <table class="table table-sm table-responsive table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">Название журнала (сборника статей (трудов))</th>
+                    <th scope="col">Перечень ВАК (да, нет)</th>
+                    <th scope="col">Международная база научного цитирования (выбрать из списка)</th>
+                    <th scope="col">Издательство</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for magazine in magazinelist %}
+                    <tr>
+                        <td>{{ magazine.magazinename }}</td>
+                        <td>
+                            {% if magazine.invak %}
+                                Да
+                            {%  else %}
+                                Нет
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% for international in magazine.ininternational.all %}
+                                {{international }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <nobr>{{ magazine.publication_set.first.publisher }}</nobr>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for digest in digestlist %}
+
+                    <tr>
+                        <td>{{ digest.digestname }}</td>
+                        <td>
+                            {% if digest.invak %}
+                                Да
+                            {%  else %}
+                                Нет
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% for international in digest.ininternational.all %}
+                                {{ international }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <nobr>{{ digest.publication_set.first.publisher }}</nobr>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script src="{% static 'reporting/js/reportingmain.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

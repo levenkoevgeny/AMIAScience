@@ -1,0 +1,167 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'sciencework:list' %}" method="get">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Автор (один либо несколько)</label>
+                {% render_field filter.form.authors class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Подразделение (одно либо несколько)</label>
+                {% render_field filter.form.subdivisions class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Вид публикации</label>
+                {% render_field filter.form.kind class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Вид учебного издания</label>
+                {% render_field filter.form.subspecies class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Год c </label>
+                {% render_field filter.form.year_gte class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Год по </label>
+                {% render_field filter.form.year_lte class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Полугодие</label>
+                {% render_field filter.form.halfyear class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label>Выходные данные</label>
+                {% render_field filter.form.outputdata class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Международная база научного цитирования</label>
+                {% render_field filter.form.ininternationals class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>ВАК</label>
+                {% render_field filter.form.invak class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Сторонние авторы</label>
+                {% render_field filter.form.workisforeignauthors class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>Участие обучающихся</label>
+                {% render_field filter.form.scienceworkstudentparticipation class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label>По итогам научного форума</label>
+                {% render_field filter.form.is_forum_result class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Журнал</label>
+                {% render_field filter.form.magazine class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Сборник статей(трудов)</label>
+                {% render_field filter.form.digest class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Издательство</label>
+                {% render_field filter.form.publisher class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Гриф</label>
+                {% render_field filter.form.grif class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>В чьих интересах</label>
+                {% render_field filter.form.interest class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Вид научного форума</label>
+                {% render_field filter.form.kindforum class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Статус научного форума</label>
+                {% render_field filter.form.forumstatus class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Страна проведения форума</label>
+                {% render_field filter.form.forumcountry class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Организатор научного форума</label>
+                {% render_field filter.form.organizatorforum class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Конференция</label>
+                {% render_field filter.form.conference class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'sciencework:list' %}" class="btn btn-outline-dark">Сбросить фильтр</a>
+</form>

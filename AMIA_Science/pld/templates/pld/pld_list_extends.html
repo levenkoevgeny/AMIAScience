@@ -1,0 +1,66 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>ПЛД</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'pld:input' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить ПЛД</a>
+{% endblock %}
+
+{% block filters %}
+    {% include "pld/filters_new.html" %}
+{% endblock %}
+
+{% block list %}
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th scope="col" class="sorting" id='id'>Id</th>
+            <th scope="col" class="sorting" id='kind'>Вид</th>
+            <th scope="col" class="sorting" id='pldtitle'>Название</th>
+            <th scope="col">Дата начала</th>
+            <th scope="col">Дата регистрации</th>
+            <th scope="col">Номер патента</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Сторонние авторы</th>
+            <th scope="col">Патентообладатель</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pld in list %}
+            <tr>
+                <th scope="row">{{ pld.id }}</th>
+                <td>{{ pld.kind.kindtitle }}</td>
+                <td>{{ pld.pldtitle }}</td>
+                <td>{{ pld.actionstart|date:"d.m.Y" }}</td>
+                <td>{{ pld.registrationdate|date:"d.m.Y" }}</td>
+                <td>{{ pld.panentnumber }}</td>
+                <td>
+                    {% for author in pld.authors.all %}
+                        <nobr>{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}.</nobr><br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {%  for other in pld.authorsother.all %}
+                        <nobr>{{ other.lastname|default_if_none:'Нет данных' }} {{ other.initials }}</nobr><br>
+                    {% endfor %}
+
+                </td>
+                <td>
+                    {%  for owner in pld.patentowner.all %}
+                        {{ owner|default_if_none:'Нет данных' }}<br>
+                    {% endfor %}
+                  </td>
+                <td><a href="{% url 'pld:pldchange' pld.id %}" class="btn btn-light"><i class="fas fa-cogs"></i></a></td>
+                <td><a href="{% url 'pld:plddelete' pld.id %}" class="btn btn-light"><i class="fas fa-trash-alt"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

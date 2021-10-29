@@ -1,0 +1,58 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'sciencework:conference_list' %}" method="get">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Название конференции</label>
+                {% render_field filter.form.conferencename class+="form-control extra_inputs" %}
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Статус научного форума</label>
+                {% render_field filter.form.forumstatus class+="form-control extra_inputs" %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Организатор форума</label>
+                {% render_field filter.form.organizatorforum class+="form-control extra_inputs" %}
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Страна проведения</label>
+                {% render_field filter.form.forumcountry class+="form-control extra_inputs" %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Год проведения форума</label>
+                {% render_field filter.form.forumdate class+="form-control extra_inputs" %}
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Вид научного форума</label>
+                {% render_field filter.form.kindforum class+="form-control extra_inputs" %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <label>Модераторы научного форума/руководители секции</label>
+            {% render_field filter.form.moderators class+="form-control extra_inputs" %}
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'sciencework:conference_list' %}" class="btn btn-outline-dark">Сбросить фильтр</a>
+</form>

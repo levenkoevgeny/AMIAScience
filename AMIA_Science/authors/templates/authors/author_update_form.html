@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    {% load widget_tweaks %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <title>Редактирование данных</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanel.html"%}
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <br>
+            <div id="maincontent">
+                <div id="employee">
+                    <h5>Данные для редактирования</h5>
+                    <form class="needs-validation" method="post" novalidate>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                    <div class="card-header">Личные сведения сотрудника</div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Фамилия</label>
+                                            {{ form.lastname|add_class:"form-control"|attr:"required" }}
+                                            <div class="invalid-feedback">
+                                                Это поле является обязательным для заполнения!
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Имя</label>
+                                            {{ form.firstname|add_class:"form-control"|attr:"required" }}
+                                            <div class="invalid-feedback">
+                                                Это поле является обязательным для заполнения!
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Отчество</label>
+                                            {{ form.patronymic|add_class:"form-control"|attr:"required" }}
+                                            <div class="invalid-feedback">
+                                                Это поле является обязательным для заполнения!
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Дата рождения</label>
+                                            {{ form.dateofbirth|add_class:"form-control"|attr:"required" }}
+                                            <div class="invalid-feedback">
+                                                Это поле является обязательным для заполнения!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                    <div class="card-header">Сведения о прохождении службы</div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>Подразделение</label>
+                                            {{ form.subdivision|add_class:"form-control"|attr:"required" }}
+                                            <div class="invalid-feedback">
+                                                Это поле является обязательным для заполнения!
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Звание</label>
+                                            {{ form.rank|add_class:"form-control"|attr:"required" }}
+                                            <div class="invalid-feedback">
+                                                Это поле обязательно для заполнения
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Должность</label>
+                                            {{ form.position|add_class:"form-control"|attr:"required" }}
+                                            <div class="invalid-feedback">
+                                                Это поле является обязательным для заполнения!
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label>Дата назначения</label>
+                                                    {{ form.positiondate|add_class:"form-control"|attr:"required" }}
+                                                    <div class="invalid-feedback">
+                                                        Выберите дату!
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label>Рабочий статус</label>
+                                                    {{ form.workstatus|add_class:"form-control"|attr:"required" }}
+                                                    <div class="invalid-feedback">
+                                                        Это поле является обязательным для заполнения!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                    <div class="card-header">Сведения об ученых званиях</div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 border-right">
+                                                <div class="d-flex align-items-center flex-row justify-content-between">
+                                                    <div><label>Доцент по ВАК</label></div>
+                                                    <div>{{ form.isdocentvak|attr:"type:checkbox"|attr:"id:employeedocentcheck" }}</div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label>Присвоено</label>
+                                                    {% if form.isdocentvak.value %}
+                                                        {{ form.docentvakdate|add_class:"form-control"|attr:"id:employeedocentdate"|attr:"required"}}
+                                                    {% else %}
+                                                        {{ form.docentvakdate|add_class:"form-control"|attr:"id:employeedocentdate"|attr:"disabled:disabled"|attr:"required"}}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Выберите дату!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="d-flex align-items-center flex-row justify-content-between">
+                                                    <div><label>Профессор</label></div>
+                                                    <div>{{ form.isprofessor|attr:"type:checkbox"|attr:"id:employeeprofessorcheck"}}</div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <label>Присвоено</label>
+                                                    {% if form.isprofessor.value %}
+                                                        {{ form.professordate|add_class:"form-control"|attr:"id:employeeprofessordate"|attr:"required" }}
+                                                    {% else %}
+                                                        {{ form.professordate|add_class:"form-control"|attr:"id:employeeprofessordate"|attr:"disabled:disabled"|attr:"required" }}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Выберите дату!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                    <div class="card-header">Дополнительная информация</div>
+                                    <div class="card-body text-secondary">
+                                        <div class="form-group">
+                                            {{ form.extradata|add_class:"form-control"|attr:"rows:3" }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                            <div class="card-header">Сведения о научной деятельности</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 border-right">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 d-flex align-items-center justify-content-between">
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div>{{ form.iscandidate|attr:"type:checkbox"|attr:"id:employeecandidatecheck" }}</div>
+                                                    <label>Кандидат наук</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 d-flex align-items-start flex-row justify-content-between">
+                                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                                    <div><label>Присвоено</label></div>
+                                                    {% if form.iscandidate.value %}
+                                                        {{ form.candidatedate|add_class:"form-control"|attr:"id:employeecandidatedate"|attr:"required" }}
+                                                    {% else %}
+                                                        {{ form.candidatedate|add_class:"form-control"|attr:"id:employeecandidatedate"|attr:"disabled:disabled"|attr:"required" }}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Выберите дату!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Выберите дату!
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    <div><label>Название кандидатской диссертации</label></div>
+                                                    {% if form.iscandidate.value %}
+                                                        {{ form.candidatetitle|add_class:"form-control"|attr:"id:employeecandidatetitle"|attr:"rows:3"|attr:"required" }}
+                                                    {% else %}
+                                                        {{ form.candidatetitle|add_class:"form-control"|attr:"id:employeecandidatetitle"|attr:"disabled:disabled"|attr:"rows:3"|attr:"required" }}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Это поле является обязательным для заполнения!
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div><label>Специальность</label></div>
+                                                    {% if form.iscandidate.value %}
+                                                        {{ form.candidatespecialty|add_class:"form-control"|attr:"id:employeecandidatespecialty"|attr:"required" }}
+                                                    {% else %}
+                                                        {{ form.candidatespecialty|add_class:"form-control"|attr:"id:employeecandidatespecialty"|attr:"disabled:disabled"|attr:"required" }}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Это поле является обязательным для заполнения!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 d-flex align-items-center justify-content-between">
+                                                <div class="d-flex align-items-center flex-row justify-content-between">
+                                                    {{ form.isdoctor|attr:"type:checkbox"|attr:"id:employeedoctorcheck" }}
+                                                    <div><label>Доктор наук</label></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="d-flex align-items-center flex-row justify-content-between">
+                                                    <div><label>Присвоено</label></div>
+                                                    {% if form.isdoctor.value %}
+                                                        {{ form.doctordate|add_class:"form-control"|attr:"id:employeedoctordate"|attr:"required"  }}
+                                                    {% else %}
+                                                        {{ form.doctordate|add_class:"form-control"|attr:"id:employeedoctordate"|attr:"disabled:disabled"|attr:"required"  }}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Выберите дату!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                                <div class="form-group">
+                                                    <div><label>Название докторской диссертации</label></div>
+                                                    {% if form.isdoctor.value %}
+                                                        {{ form.doctortitle|add_class:"form-control"|attr:"id:employeedoctortitle"|attr:"rows:3"|attr:"required" }}
+                                                    {% else %}
+                                                        {{ form.doctortitle|add_class:"form-control"|attr:"id:employeedoctortitle"|attr:"rows:3"|attr:"disabled:disabled"|attr:"required" }}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Это поле является обязательным для заполнения!
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div><label>Специальность</label></div>
+                                                    {% if form.isdoctor.value %}
+                                                        {{ form.doctorspecialty|add_class:"form-control"|attr:"id:employeedoctorspecialty"|attr:"required" }}
+                                                    {% else %}
+                                                        {{ form.doctorspecialty|add_class:"form-control"|attr:"id:employeedoctorspecialty"|attr:"disabled:disabled"|attr:"required" }}
+                                                    {% endif %}
+                                                    <div class="invalid-feedback">
+                                                        Это поле является обязательным для заполнения!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-dark" value="Update">Сохранить!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'index/js/check_form.js' %}"></script>
+<script src="{% static 'authors/js/main.js' %}"></script>
+</body>
+</html>

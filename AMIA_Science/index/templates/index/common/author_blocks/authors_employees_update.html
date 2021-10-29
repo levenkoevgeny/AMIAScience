@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title></title>
+</head>
+<body>
+
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Исполнители</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <input type="text" class="form-control authorinput" name="inputauthors1" id="inputauthors1" value="{{ authorfirst.lastname }} {{ authorfirst.firstname|slice:":1" }}.{{ authorfirst.patronymic|slice:":1" }}." required>
+                <input type="hidden" id="authoridhidden1" name="authoridhidden1" class="authoridhidden" value="{{ authorfirst.id }}">
+                <div class="divforajax"></div>
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 two">
+                <div class="d-flex align-items-center flex-row justify-content-between">
+                    <input type="text" disabled class="form-control disabledextrainput" value="{{ authorfirst.subdivision }}" style="width: 90%;">
+                    <button type="button" id="scienceworkaddauthor" class="btn btn-outline-primary inputbutton">+</button>
+                </div>
+            </div>
+        </div>
+        <div id="extraauthors">
+            {% if authorsrest %}
+                {% for author in authorsrest %}
+                    <div id="rowextraauthors" class="rowextraauthors"><br>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <input type="text" class="form-control authorinput" name="inputauthors" id="inputauthors" value="{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}." required>
+                                <input type="hidden" id="authoridhidden" name="authoridhidden" class="authoridhidden" value="{{ author.id }}">
+                                <div class="divforajax"></div>
+                                <div class="invalid-feedback">
+                                    Заполните поле!
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 two">
+                                <div class="d-flex align-items-center flex-row justify-content-between">
+                                    <input type="text" disabled class="form-control disabledextrainput" value="{{ author.subdivision }}" style="width: 90%;">
+                                    <button type="button" id="scienceworkdeleteauthor" class="btn btn-outline-danger deleteauthorbutton inputbutton">--</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <input type="hidden" name="authorscount" id="authorscount" value="{{ obj.authors.count }}">
+</div>
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'index/js/author_with_addbutton.js' %}"></script>
+</body>
+</html>

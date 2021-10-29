@@ -1,0 +1,84 @@
+{% extends "base_list.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+{% block title %}
+    <title>Авторы</title>
+{% endblock %}
+
+{% block add_button %}
+    <a href="{% url 'authors:input' %}" class="btn btn-light"><i class="fas fa-plus-circle"></i> Добавить автора</a>
+{% endblock %}
+
+{% block filters %}
+    {% include "authors/filters_new.html" %}
+{% endblock %}
+
+{% block list %}
+    <table class="table table-sm">
+        <thead class="table-active">
+        <tr>
+            <th class="sorting" scope="col" id='id' >Id</th>
+            <th class="sorting" scope="col" id='lastname'>Фамилия Инициалы</th>
+            <th class="sorting" scope="col" id='dateofbirth'>Дата рождения</th>
+            <th class="sorting" scope="col" id='subdivision'>Подразделение(кафедра)</th>
+            <th class="sorting" scope="col" id='position'>Должность</th>
+            <th class="sorting" scope="col" id='rank'>Звание</th>
+            <th >Доцент ВАК</th>
+            <th >Профессор</th>
+            <th >Кандидатская диссертация</th>
+            <th >Кандидатская специальность</th>
+            <th >Докторская диссертация</th>
+            <th  scope="col">Докторская специальность</th>
+            <th  scope="col"></th>
+            <th  scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for author in list %}
+            <tr>
+                <th scope="row">{{ author.id }}</th>
+                <td><nobr>{{ author.lastname }} {{ author.firstname|slice:":1" }}.{{ author.patronymic|slice:":1" }}.</nobr></td>
+                <td>{{ author.dateofbirth|date:"d.m.Y" }}</td>
+                <td title="{{ author.subdivision }}">{{ author.subdivision.subdivision_short_name }}</td>
+                <td>{{ author.position }}</td>
+                <td>{{ author.rank }}</td>
+                {% if author.isdocentvak %}
+                    <td>Да</td>
+                {% else %}
+                    <td>Нет</td>
+                {% endif %}
+                {% if author.isprofessor %}
+                    <td>Да</td>
+                {% else %}
+                    <td>Нет</td>
+                {% endif %}
+                {% if author.iscandidate %}
+                    <td title="{{ author.candidatetitle }}">{{ author.candidatetitle|truncatechars:30 }}</td>
+                {% else %}
+                    <td>Нет</td>
+                {% endif %}
+                {% if author.iscandidate %}
+                    <td title="{{ author.candidatespecialty.candidatespecialtytitle }}">{{ author.candidatespecialty.candidatespecialtytitle|truncatechars:30 }}</td>
+                {% else %}
+                    <td>Нет</td>
+                {% endif %}
+                {% if author.isdoctor %}
+                    <td title="{{ author.doctortitle }}">{{ author.doctortitle|truncatechars:30 }}</td>
+                {% else %}
+                    <td>Нет</td>
+                {% endif %}
+                {% if author.isdoctor %}
+                    <td title="{{ author.doctorspecialty.doctorspecialtytitle }}">{{ author.doctorspecialty.doctorspecialtytitle|truncatechars:30 }}</td>
+                {% else %}
+                    <td>Нет</td>
+                {% endif %}
+                <td><a href="{% url 'authors:authorchange' author.id %}" class="btn btn-light"><i class="fas fa-users-cog"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

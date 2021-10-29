@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+
+    <title>Редактирование данных</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+<body>
+{% include "index/common/navs/nav.html" %}
+<div class="container-fluid">
+    <div class="row">
+        {% include "index/common/navs/sidepanel.html"%}
+        <div class="col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <br>
+            <div id="maincontent">
+                <form class="needs-validation" action="{% url 'nir:makeupdatenir' %}" method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                <div class="card-header">Данные научно-исследовательской работы</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                                    <div class="form-group">
+                                                        <label>Наименование научно-исследовательской работы</label>
+                                                        <textarea class="form-control"  name="nirnaimenovanie" id="nirnaimenovanie" rows="2" style="width: 100%" required>{{ obj.nirtitle }}</textarea>
+                                                        <div class="invalid-feedback">
+                                                            Заполните поле!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                                    <div class="form-group">
+                                                        <label>Дата начала</label>
+                                                        <input type="date" class="form-control" name="nirdatebegin" id="nirdatebegin" style="width: 100%;" value="{{ obj.startdate|date:"Y-m-d" }}" required>
+                                                        <div class="invalid-feedback">
+                                                            Заполните поле!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                                    <div class="form-group">
+                                                        <label>Дата окончания</label>
+                                                        <input type="date" class="form-control" name="nirdateend" id="nirdateend" style="width: 100%;" value="{{ obj.enddate|date:"Y-m-d" }}" required>
+                                                        <div class="invalid-feedback">
+                                                            Заполните поле!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                                    <div class="form-group">
+                                                        <label>Дата утверждения отчета</label>
+                                                        <input type="date" class="form-control" name="nirdateapprove" id="nirdateapprove" style="width: 100%;" value="{{ obj.approvedate|date:"Y-m-d" }}">
+                                                        <div class="invalid-feedback">
+                                                            Заполните поле!
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                            <div class="form-group">
+                                                <label>Основание для проведения НИР</label>
+                                                <select name="nirreason" id="nirreason" class="form-control" multiple size="3" required>
+                                                    {% for reason in reasonlist %}
+                                                        {% if reason.id in reasonIdList %}
+                                                            <option selected value="{{ reason.id }}">{{ reason.reasonname }}</option>
+                                                        {% else %}
+                                                            <option value="{{ reason.id }}">{{ reason.reasonname }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                            <div class="form-group">
+                                                <label>Пункт плана НИД Академии МВД</label>
+                                                <input type="text" class="form-control" name="nirplanitem" id="nirplanitem" placeholder="Введите пункт плана НИД" value="{{ obj.planitem }}" required>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                            <div class="form-group">
+                                                <label>Результаты исследования</label>
+                                                <select name="nirresult" id="nirresult" class="form-control">
+                                                    <option selected disabled></option>
+                                                    {% for result in resultlist %}
+                                                        {% if obj.result.id == result.id %}
+                                                            <option selected value="{{ result.id }}">{{ result.researchresultname }}</option>
+                                                        {% else %}
+                                                            <option value="{{ result.id }}">{{ result.researchresultname }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "index/common/author_blocks/authors_employees_update.html" %}
+                            {% include "index/common/leader_block/leader.html" %}
+
+                            <div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+                                <div class="card-header">Организация
+                                    {% if organizationIdList %}
+                                        <input type="checkbox" name="organization_check" id="organization_check" checked>
+                                    {% else %}
+                                        <input type="checkbox" name="organization_check" id="organization_check">
+                                    {% endif %}
+                                </div>
+                                <div class="card-body" style="display: none;" id="organization_div">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <select name="organisation" id="organisation" class="form-control" multiple size="3" required>
+                                                    {% for organisation in nir_organisation_list %}
+                                                        {% if organisation.id in organizationIdList %}
+                                                            <option selected value="{{ organisation.id }}">{{ organisation.organization_name }}</option>
+                                                        {% else %}
+                                                            <option value="{{ organisation.id }}">{{ organisation.organization_name }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+
+                                                <div class="invalid-feedback">
+                                                    Заполните поле!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {#                            {% include "index/common/author_blocks/authors_other_update.html" %}#}
+                        </div>
+                        {#                        <input type="hidden" name="authorscount" id="authorscount" value="{{ obj.authors.count }}">#}
+                        {#                        <input type="hidden" name="authorscountother" id="authorscountother" value="{{ obj.authorsother.count }}">#}
+                        <input type="hidden" name="nirid" id="nirid" value="{{ obj.id }}">
+                    </div>
+                    <button type="submit" name="nirsubmit" id="nirsubmit" class="btn btn-primary">Сохранить изменения!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<script src="{% static 'index/js/check_form.js' %}"></script>
+<script src="{% static 'nir/js/nir_main.js' %}"></script>
+<script src="{% static 'nir/js/update_nir_main.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#organisation, #nirreason').select2();
+    });
+</script>
+</body>
+</html>

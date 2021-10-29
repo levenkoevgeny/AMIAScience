@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Сведения о прохождении службы</div>
+    <div class="card-body">
+        <div class="form-group">
+            <label>Подразделение</label>
+            <select name="employeesubdivision" id="employeesubdivision" class="form-control" required>
+                <option selected disabled></option>
+                {% for subdivision in subdivisionlist %}
+                    <option value="{{ subdivision.id }}">{{ subdivision.subdivisionname }}</option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">
+                Заполните поле!
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Звание</label>
+            <select class="form-control" name="employeerank" id="employeerank" required>
+                <option selected disabled></option>
+                {% for rank in ranklist %}
+                    <option value="{{ rank.id }}">{{ rank.rank }}</option>
+                {% endfor %}
+            </select>
+
+            <div class="invalid-feedback">
+                Заполните поле!
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Должность</label>
+            <select class="form-control" name="employeeposition" id="employeeposition" required>
+                <option selected disabled></option>
+                {% for position in positionlist %}
+                    <option value="{{ position.id }}">{{ position.positionname }}</option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">
+               Заполните поле!
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label>Дата назначения</label>
+                    <input type="date" class="form-control" name="employeedateposition" id="employeedateposition" required>
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="form-group">
+                    <label>Рабочий статус</label>
+                    <select class="form-control" name="employeeworkstatus" id="employeeworkstatus" required>
+                        <option selected disabled></option>
+                        {% for status in workstatuslist %}
+                            <option value="{{ status.id }}">{{ status.status }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

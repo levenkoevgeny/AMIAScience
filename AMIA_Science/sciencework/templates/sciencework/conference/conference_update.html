@@ -1,0 +1,11 @@
+{% extends "sciencework/conference/conference_input.html" %}
+{% block title %}
+    <title>Редактирование конференции</title>
+ {% endblock %}
+{% block form_title %}
+    <form class="needs-validation" action="{% url 'sciencework:conference_update' conference_id=obj.id %}"  method="post" novalidate>{% csrf_token %}
+{% endblock %}
+
+{% block button %}
+    <button type="submit" class="btn btn-primary">Сохранить!</button>
+{% endblock %}

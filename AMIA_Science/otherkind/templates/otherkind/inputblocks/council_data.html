@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="counsil_div" style="display: none;">
+    <div class="row">
+        <div class="col-lg-4 d-flex align-items-end">
+            <div class="form-group">
+                <label style="line-height: 1">Название совета</label>
+                {% if obj.сouncil %}
+                    <select name="сouncil" id="сouncil" class="form-control" style="width: 100%">
+                        <option disabled></option>
+                        {% for сouncil in сouncillist %}
+                            {% if obj.сouncil.id == сouncil.id %}
+                                <option selected value="{{ сouncil.id }}">{{ сouncil.сounciltitle }}</option>
+                            {% else %}
+                                <option value="{{ сouncil.id }}">{{ сouncil.сounciltitle }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <select name="сouncil" id="сouncil" class="form-control">
+                        <option selected disabled></option>
+                        {% for сouncil in сouncillist %}
+                            <option value="{{ сouncil.id }}">{{ сouncil.сounciltitle }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 d-flex align-items-end">
+            <div class="form-group">
+                <label style="line-height: 1;">Работа, выполненная в составе совета (результат участия)</label>
+                {% if obj.completed_work_council %}
+                    <select name="completed_work_council" id="completed_work_council" class="form-control">
+                        <option disabled></option>
+                        {% for work in worklist %}
+                            {% if obj.completed_work_council.id == work.id %}
+                                <option selected value="{{ work.id }}">{{ work.worktitle }}</option>
+                            {% else %}
+                                <option value="{{ work.id }}">{{ work.worktitle }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <select name="completed_work_council" id="completed_work_council" class="form-control">
+                        <option selected disabled></option>
+                        {% for work in worklist %}
+                            <option value="{{ work.id }}">{{ work.worktitle }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 d-flex align-items-end">
+            <div class="form-group">
+                <label style="line-height: 1">Учреждение, при котором действует совет</label>
+                {% if obj.institution %}
+                    <select name="institution" id="institution" class="form-control">
+                        <option disabled></option>
+                        {% for institution in institutionlist %}
+                            {% if obj.institution.id == institution.id %}
+                                <option selected value="{{ institution.id }}">{{ institution.institutionname }}</option>
+                            {% else %}
+                                <option value="{{ institution.id }}">{{ institution.institutionname }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <select name="institution" id="institution" class="form-control">
+                        <option selected disabled></option>
+                        {% for institution in institutionlist %}
+                            <option value="{{ institution.id }}">{{ institution.institutionname }}</option>
+                        {% endfor %}
+                    </select>
+                {% endif %}
+                <div class="invalid-feedback">
+                    Заполните поле!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

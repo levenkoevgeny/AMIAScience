@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title></title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'index:index' %}">Академия МВД НИО</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated  %}
+                <li class="nav-item">
+                    <a class="nav-link"><i class="fas fa-user"></i> Вы вошли в систему как {{ user.last_name }} {{ user.first_name }}!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}"> Выход из системы</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login'  %}"><i class="fas fa-user"></i> Вход в систему</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'index/js/bootstrap.js' %}"></script>
+<script src="{% static 'index/js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

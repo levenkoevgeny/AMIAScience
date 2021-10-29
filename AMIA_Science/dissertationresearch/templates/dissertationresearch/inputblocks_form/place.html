@@ -1,0 +1,33 @@
+{% load widget_tweaks %}
+
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Место проведения исследования</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Место проведения исследования</label>
+                    {% render_field form.researchplace|append_attr:"required" class+="form-control" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Подразделение</label>
+                    {% if obj.researchplace.id == 1 %}
+                        {% render_field form.researchplacesubdivision class+="form-control" %}
+                    {% else %}
+                        {% render_field form.researchplacesubdivision|append_attr:"disabled" class+="form-control" %}
+                    {% endif %}
+
+
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

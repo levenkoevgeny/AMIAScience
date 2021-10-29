@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% load static %}
+    {% load widget_tweaks %}
+    <link rel="stylesheet" type="text/css" href="{% static 'index/css/stylemain.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+
+    <title>Сторонний автор</title>
+    <link rel="shortcut icon" href="{% static 'images/Iconsmind-Outline-Books.ico' %}" />
+</head>
+
+<body>
+<div class="container">
+    <br>
+    <form method="post" class="needs-validation" novalidate>{% csrf_token %}
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Фамилия</label>
+                    {% render_field leadersnotemployees_form.lastname|append_attr:"required" class+="form-control other_leader_inputs" placeholder="Введите фамилию" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Инициалы</label>
+                    {% render_field leadersnotemployees_form.initials class+="form-control other_leader_inputs" placeholder="Введите инициалы" %}
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+{#            <div class="col-sm-4">#}
+{#                <div class="form-group">#}
+{#                    <label>Место работы</label>#}
+{#                    {% render_field leadersnotemployees_form.job class+="form-control other_leader_inputs" placeholder="Введите место работы"%}#}
+{#                    <div class="invalid-feedback">#}
+{#                        Заполните поле!#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+{#        <div class="row">#}
+{#            <div class="col-sm-6">#}
+{#                <div class="form-group">#}
+{#                    <label>Ученое звание</label>#}
+{#                    {% render_field leadersnotemployees_form.academicrank class+="form-control other_leader_inputs" %}#}
+{#                    <div class="invalid-feedback">#}
+{#                        Заполните поле!#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-sm-6">#}
+{#                <div class="form-group">#}
+{#                    <label>Ученая степень</label>#}
+{#                    {% render_field leadersnotemployees_form.academicdegree class+="form-control other_leader_inputs" %}#}
+{#                    <div class="invalid-feedback">#}
+{#                        Заполните поле!#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+        <button type="button" class="btn btn-primary" id="other_author_add">Сохранить</button>
+    </form>
+</div>
+<script src="{% static 'index/js/JQueryLocal.js' %}"></script>
+<script src="{% static 'index/js/check_form.js' %}"></script>
+
+
+<script>
+
+    function form_submit(){
+
+        let form_data = $("form").serializeArray();
+
+        $.ajax({
+            url: "/author/other_author_input_form/",
+            method: "POST",
+            dataType: 'json',
+            data: form_data,
+            timeout : 100000,
+            success: function (data) {
+                if (data['error']) {
+                    alert(data['error']);
+                } else {
+                    let new_id = data['new_id'];
+                    let new_lastname = data['new_lastname'];
+                    let new_option = `<option value="${new_id}" selected>${new_lastname}</option>`;
+                    window.opener.jQuery("#id_otherauthor").append(new_option);
+                    window.close();
+                }
+            },
+            error: function (e) {
+                console.log("ERROR: ", e);
+            },
+            done: function (e) {
+                console.log("DONE");
+            }
+        });
+    }
+
+    $("#other_author_add").click(function(event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var form = document.getElementsByClassName('needs-validation');
+
+        if (form[0].checkValidity() === true) {
+            form_submit();
+        }
+        form[0].classList.add('was-validated');
+
+    });
+</script>
+
+</body>
+</html>

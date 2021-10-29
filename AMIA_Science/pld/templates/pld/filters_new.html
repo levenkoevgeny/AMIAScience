@@ -1,0 +1,80 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'pld:list' %}" method="get">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Автор (один либо несколько)</label>
+                {% render_field filter.form.authors class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Подразделение (одно либо несколько)</label>
+                {% render_field filter.form.subdivisions class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Вид</label>
+                {% render_field filter.form.kind class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Название</label>
+                {% render_field filter.form.pldtitle class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Патентообладатель</label>
+                {% render_field filter.form.patentowner class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Номер патента</label>
+                {% render_field filter.form.panentnumber class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год начала действия с</label>
+                {% render_field filter.form.actionstart_gte class+="form-control" max="2500" %}
+
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год начала действия по</label>
+                {% render_field filter.form.actionstart_lte class+="form-control" max="2500" %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год регистрации с</label>
+                {% render_field filter.form.registrationdate_gte class+="form-control" max="2500" %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год регистрации по</label>
+                {% render_field filter.form.registrationdate_lte class+="form-control" max="2500"  %}
+            </div>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'pld:list' %}" class="btn btn-outline-dark">Сбросить фильтр</a>
+</form>

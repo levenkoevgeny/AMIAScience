@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="card border-secondary mb-2" style="max-width: 100%; line-height: 0.6;">
+    <div class="card-header">Сведения об ученых званиях</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 border-right">
+                <div class="d-flex flex-row">
+                    <input type="checkbox" name="employeedocentcheck" id="employeedocentcheck"><label>Доцент по ВАК</label>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>Присвоено</label>
+                    <input type="date" disabled class="form-control" name="employeedocentdate" id="employeedocentdate" required>
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="d-flex flex-row">
+                    <input type="checkbox" name="employeeprofessorcheck" id="employeeprofessorcheck"><label>Профессор</label>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label>Присвоено</label>
+                    <input type="date" disabled class="form-control" name="employeeprofessordate" id="employeeprofessordate" style="width: 100%;" required>
+                    <div class="invalid-feedback">
+                        Заполните поле!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

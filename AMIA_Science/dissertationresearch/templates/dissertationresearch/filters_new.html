@@ -1,0 +1,92 @@
+{% load static %}
+{% load widget_tweaks %}
+<form action="{% url 'dissertation:list' %}" method="get">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Автор (один либо несколько)</label>
+                {% render_field filter.form.author class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Статус исследователя</label>
+                {% render_field filter.form.status class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Вид</label>
+                {% render_field filter.form.kind class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Основание проведения</label>
+                {% render_field filter.form.reason class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group">
+                <label>Результат исследования</label>
+                {% render_field filter.form.result class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Тема</label>
+                {% render_field filter.form.dissertationtheme class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год начала</label>
+                {% render_field filter.form.datebegin class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="form-group">
+                <label>Год окончания</label>
+                {% render_field filter.form.dateend class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Научный руководитель</label>
+                {% render_field filter.form.leadersemployees class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Подразделение научного руководителя</label>
+                {% render_field filter.form.leadersemployeessubdivision class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Место проведения исследования</label>
+                {% render_field filter.form.researchplace class+="form-control"  %}
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label>Подразделение проведения исследования</label>
+                {% render_field filter.form.researchplacesubdivision class+="form-control"  %}
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-dark">Поиск</button>&nbsp;&nbsp;<a href="{% url 'dissertation:list' %}" class="btn btn-outline-dark">Сбросить фильтр</a>
+</form>

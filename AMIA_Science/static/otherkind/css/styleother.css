@@ -1,0 +1,29 @@
+.authorsajax {
+    width: 500px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.authorsajaxother {
+    width: 500px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+.resultauthors{
+    border-style: none!important;
+}
+
+div.resultauthors:hover{
+    background-color: #f8f9fa;
+
+}
+
+.resultauthorsother{
+    border-style: none!important;
+}
+
+div.resultauthorsother:hover{
+    background-color: #f8f9fa;
+
+}

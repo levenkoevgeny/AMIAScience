@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load url_replace %}
+
+
+{% block css %}{% endblock %}
+{% block title %}
+    <title>Научные работы</title>
+{% endblock %}
+
+{% block nav %}
+    {% include "index/common/navs/navforAMIA.html"%}
+{% endblock %}
+
+{% block side_panel %}{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+
+        <br>
+
+
+
+        <div class="row">
+            <div class="col-12">
+
+
+                <table class="table table-striped">
+                    <tbody>
+                    {% if subdivision_works_list %}
+                        {% for work in subdivision_works_list %}
+                            <tr>
+                                <td> {{ work }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% elif author_works_list %}
+                        <ul class="list-group">
+                            {% for work in author_works_list %}
+                                <tr>
+                                    <td> {{ work }}</td>
+                                </tr>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        List is empty!
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block js %}{% endblock %}
+
+
+
